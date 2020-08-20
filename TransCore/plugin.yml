@@ -2,3 +2,4 @@ name: TransCore
 version: 1.0.0_BETA
 main: com.lcmcconaghy.java.transcore.TransCore
 authors: [Ironhippy]
+api-version: 1.13
