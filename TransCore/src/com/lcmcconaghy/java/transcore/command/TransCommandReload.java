@@ -28,6 +28,12 @@ public class TransCommandReload extends TransCommand
 	@Override
 	public void execute() throws TransCommandException
 	{
+		if (!config.isInitialized())
+		{
+			error("Could not reload config. There is no defined Config");
+			return;
+		}
+		
 		config.load();
 		
 		message("<d>"+this.plugin.getName()+" <a>has been reloaded.");
