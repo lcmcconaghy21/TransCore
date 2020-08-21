@@ -36,6 +36,11 @@ public class UtilGeneral
 		return ret;
 	}
 	
+	/**
+	 * @param arg0 String separator
+	 * @param args String array arguments
+	 * @return String combining args
+	 */
 	public static String listify(String arg0, String[] args)
 	{
 		return StringUtils.join(args, arg0);
