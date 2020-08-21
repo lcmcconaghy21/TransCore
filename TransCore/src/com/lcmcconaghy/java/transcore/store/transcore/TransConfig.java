@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import com.lcmcconaghy.java.transcore.Message;
 import com.lcmcconaghy.java.transcore.TransCore;
 import com.lcmcconaghy.java.transcore.store.Config;
 import com.lcmcconaghy.java.transcore.util.UtilGeneral;
@@ -31,6 +32,8 @@ public class TransConfig extends Config
 	private int mongoPort = 29;
 	private String mongoUser = "username";
 	private String mongoPassword = "password";
+	
+	private String serverMOTD = "Welcome to v{$config.version} of My Server! :)";
 	
 	private Map<String, List<String>> versions = UtilGeneral.map("0.9.0", 
 			                                                     UtilGeneral.list("Server Release"));
@@ -74,6 +77,21 @@ public class TransConfig extends Config
 	public String getMongoPassword()
 	{
 		return this.mongoPassword;
+	}
+	
+	/**
+	 * @return formatted MOTD
+	 */
+	public String getMotd()
+	{
+		String motd = this.serverMOTD;
+		
+		if (motd.contains("{$config.version}"))
+		{
+			motd.replaceAll("{$config.version}", getLatestVersion());
+		}
+		
+		return Message.format(motd);
 	}
 	
 	/**
