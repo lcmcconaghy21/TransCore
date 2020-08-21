@@ -16,7 +16,7 @@ public class TransCommandHelp extends TransCommand
 		
 		this.setDesc("display all commands");
 		
-		this.addArgument(new ArgumentInteger(), "page", false, true);
+		this.addArgument(ArgumentInteger.get(), "page", false, true);
 	}
 	
 	// { EXECUTE } //

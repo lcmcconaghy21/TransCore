@@ -9,6 +9,10 @@ import com.lcmcconaghy.java.transcore.command.argument.ArgumentAbstract;
 
 public class ArgumentString extends ArgumentAbstract<String>
 {
+	// { SINGLETON } //
+	
+	private static ArgumentString i = new ArgumentString();
+	public static ArgumentString get() { return ArgumentString.i; }
 	
 	// { CONSTRUCTOR } //
 	

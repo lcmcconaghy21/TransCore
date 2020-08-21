@@ -7,27 +7,29 @@ import org.bukkit.command.CommandSender;
 import com.lcmcconaghy.java.transcore.command.argument.ArgumentAbstract;
 import com.lcmcconaghy.java.transcore.util.UtilGeneral;
 
-public class ArgumentInteger extends ArgumentAbstract<Integer>
+public class ArgumentDouble extends ArgumentAbstract<Double>
 {
 	// { SINGLETON } //
 	
-	private static ArgumentInteger i = new ArgumentInteger();
-	public static ArgumentInteger get() { return ArgumentInteger.i; }
+	private static ArgumentDouble i = new ArgumentDouble();
+	public static ArgumentDouble get() { return ArgumentDouble.i; }
 	
 	// { CONSTRUCTOR } //
 	
-	public ArgumentInteger()
+	public ArgumentDouble()
 	{
-		super(Integer.class);
+		super(Double.class);
 	}
 	
-	// { ARG } //
-
-	public Integer read(String arg0, CommandSender arg1)
+	// { ARGUMENT } //
+	
+	@Override
+	public Double read(String arg0, CommandSender arg1)
 	{
-		return Integer.valueOf(arg0);
+		return Double.parseDouble(arg0);
 	}
 
+	@Override
 	public List<String> getTabCompleteList()
 	{
 		return UtilGeneral.list("1");

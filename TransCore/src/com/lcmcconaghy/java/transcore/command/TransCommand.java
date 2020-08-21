@@ -255,13 +255,13 @@ public class TransCommand implements Init
 	{
 		int lastPlace = this.arguments.keySet().size()-2;
 		
-		if (getArgumentAt(lastPlace)!=null && getArgumentAt(lastPlace).willConcat())
+		if (getArgumentAt(lastPlace)!=null && getArgumentAt(lastPlace).willConcat(this))
 		{
 			throw new TransCommandException("Cannot add Argument after a concat Argument!");
 		}
 		
-		arg0.setDisplay(arg1);
-		arg0.setConcat(arg2);
+		arg0.setDisplay(arg1, this);
+		arg0.setConcat(arg2, this);
 		
 		this.arguments.put(arg0, arg3);
 	}
@@ -391,8 +391,8 @@ public class TransCommand implements Init
 		
 		for (Argument<?> arg : this.arguments.keySet())
 		{
-			if (arguments.get(arg) == false) ret += " {"+arg.getDisplay()+"}";
-			else ret += " ["+arg.getDisplay()+"]";
+			if (arguments.get(arg) == false) ret += " {"+arg.getDisplay(this)+"}";
+			else ret += " ["+arg.getDisplay(this)+"]";
 		}
 		
 		return ret;

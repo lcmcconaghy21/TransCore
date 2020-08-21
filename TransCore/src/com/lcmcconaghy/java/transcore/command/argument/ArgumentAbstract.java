@@ -1,12 +1,18 @@
 package com.lcmcconaghy.java.transcore.command.argument;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import com.lcmcconaghy.java.transcore.command.TransCommand;
+
 public abstract class ArgumentAbstract<T> implements Argument<T>
 {
 	// { FIELDS } //
 	
-	protected String displayName;
+	private Map<TransCommand,Boolean> concat = new HashMap<TransCommand,Boolean>();
+	private Map<TransCommand,String> displayName = new HashMap<TransCommand,String>();
+	
 	protected Class<T> clazz;
-	protected boolean concat;
 	
 	// { CONSTRUCTOR } //
 	
@@ -17,26 +23,26 @@ public abstract class ArgumentAbstract<T> implements Argument<T>
 	
 	// { SETTERS } //
 	
-	public void setDisplay(String arg0)
+	public void setDisplay(String arg0, TransCommand arg1)
 	{
-		this.displayName = arg0;
+		this.displayName.put(arg1, arg0);
 	}
 	
-	public void setConcat(boolean arg0)
+	public void setConcat(boolean arg0, TransCommand arg1)
 	{
-		this.concat = arg0;
+		this.concat.put(arg1, arg0);
 	}
 	
 	// { GETTERS } //
 	
-	public String getDisplay()
+	public String getDisplay(TransCommand arg0)
 	{
-		return this.displayName;
+		return this.displayName.get(arg0);
 	}
 	
-	public boolean willConcat()
+	public boolean willConcat(TransCommand arg0)
 	{
-		return this.concat;
+		return this.concat.get(arg0);
 	}
 	
 	public Class<T> getType()

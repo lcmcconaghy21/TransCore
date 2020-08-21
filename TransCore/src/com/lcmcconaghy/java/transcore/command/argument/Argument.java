@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.bukkit.command.CommandSender;
 
+import com.lcmcconaghy.java.transcore.command.TransCommand;
+
 public interface Argument<T>
 {
 	
@@ -13,7 +15,7 @@ public interface Argument<T>
 	
 	public Class<T> getType();
 	
-	public String getDisplay();
+	public String getDisplay(TransCommand arg0);
 	
-	public boolean willConcat();
+	public boolean willConcat(TransCommand arg0);
 }

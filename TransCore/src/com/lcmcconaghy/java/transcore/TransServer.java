@@ -1,6 +1,7 @@
 package com.lcmcconaghy.java.transcore;
 
 import java.lang.reflect.Field;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -161,6 +162,11 @@ public class TransServer
 	public void registerUser(User arg0)
 	{
 		this.users.put(arg0.getPlayer().getUniqueId(), arg0);
+	}
+	
+	public Collection<User> getUsers()
+	{
+		return this.users.values();
 	}
 	
 	// { GETTERS } //
