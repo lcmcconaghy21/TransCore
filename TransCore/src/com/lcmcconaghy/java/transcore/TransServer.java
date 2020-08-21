@@ -1,20 +1,18 @@
 package com.lcmcconaghy.java.transcore;
 
 import java.lang.reflect.Field;
-import java.util.Collection;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Server;
 import org.bukkit.command.Command;
 import org.bukkit.command.SimpleCommandMap;
-import org.bukkit.entity.Player;
 
 import com.lcmcconaghy.java.transcore.command.TransCommand;
-import com.lcmcconaghy.java.transcore.entity.User;
+import com.lcmcconaghy.java.transcore.store.StoreCollection;
+import com.lcmcconaghy.java.transcore.store.UserCollection;
 import com.lcmcconaghy.java.transcore.store.transcore.TransConfig;
 import com.mongodb.DB;
 import com.mongodb.MongoClient;
@@ -27,7 +25,7 @@ public class TransServer
 	private Server server;
 	private SimpleCommandMap commandMap;
 	
-	private Map<UUID, User> users = new HashMap<UUID, User>();
+	private List<StoreCollection<?>> collections = new ArrayList<StoreCollection<?>>();
 	
 	private MongoClient mongoClient;
 	
@@ -110,6 +108,30 @@ public class TransServer
 	
 	// { DATABASE } //
 	
+	public void registerCollection(StoreCollection<?> arg0)
+	{
+		this.collections.add(arg0);
+	}
+	
+	public List<UserCollection<?>> getUserCollections()
+	{
+		ArrayList<UserCollection<?>> userCollections = new ArrayList<UserCollection<?>>();
+		
+		for (StoreCollection<?> collection : this.collections)
+		{
+			if (!(collection instanceof UserCollection)) continue;
+			
+			userCollections.add((UserCollection<?>) collection);
+		}
+		
+		return userCollections;
+	}
+	
+	public List<StoreCollection<?>> getStoreCollections()
+	{
+		return this.collections;
+	}
+	
 	public boolean isSerializable(Object arg0)
 	{
 		if (arg0 instanceof String ||
@@ -157,67 +179,10 @@ public class TransServer
 		return (DB) getMongoClient().getDatabase(arg0);
 	}
 	
-	// { USERS } //
-	
-	public void registerUser(User arg0)
-	{
-		this.users.put(arg0.getPlayer().getUniqueId(), arg0);
-	}
-	
-	public void unregisterUser(User arg0)
-	{
-		this.users.remove(arg0.getPlayer().getUniqueId());
-	}
-	
-	public Collection<User> getUsers()
-	{
-		return this.users.values();
-	}
-	
 	// { GETTERS } //
 	
 	public Server getAsBukkitServer()
 	{
 		return this.server;
-	}
-	
-	/**
-	 * Get User from String name
-	 * @param arg0 String name
-	 * @return User
-	 */
-	public User getUser(String arg0)
-	{
-		User ret = null;
-		
-		for (User user : this.users.values())
-		{
-			if(!user.getPlayer().getName().equalsIgnoreCase(arg0)) continue;
-			
-			ret = user;
-			break;
-		}
-		
-		return ret;
-	}
-	
-	/**
-	 * Get User from UUID
-	 * @param arg0 UUID of the Player
-	 * @return User
-	 */
-	public User getUser(UUID arg0)
-	{
-		return this.users.get(arg0);
-	}
-	
-	/**
-	 * Get User from Bukkit Player
-	 * @param arg0 Player
-	 * @return User
-	 */
-	public User getUser(Player arg0)
-	{
-		return getUser(arg0.getUniqueId());
 	}
 }

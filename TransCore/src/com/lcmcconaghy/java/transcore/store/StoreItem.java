@@ -17,6 +17,13 @@ public class StoreItem<T extends StoreItem<T>>
 	protected String id;
 	protected StoreCollection<T> store;
 	
+	// { IDENTIFICATION } //
+	
+	public String getID()
+	{
+		return this.id;
+	}
+	
 	// { STORE } //
 	
 	/**

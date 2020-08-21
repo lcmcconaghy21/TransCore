@@ -7,7 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import com.lcmcconaghy.java.transcore.command.TransCommand;
-import com.lcmcconaghy.java.transcore.entity.User;
+import com.lcmcconaghy.java.transcore.store.UserItem;
 import com.lcmcconaghy.java.transcore.util.UtilGeneral;
 
 import net.md_5.bungee.api.ChatColor;
@@ -309,7 +309,7 @@ public class Message
 	 * Send Message to User
 	 * @param arg0 User to send this Message to
 	 */
-	public void send(User arg0)
+	public void send(UserItem arg0)
 	{
 		arg0.getPlayer().spigot().sendMessage(component);
 	}

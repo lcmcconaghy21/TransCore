@@ -5,31 +5,31 @@ import java.util.List;
 
 import org.bukkit.command.CommandSender;
 
-import com.lcmcconaghy.java.transcore.TransServer;
 import com.lcmcconaghy.java.transcore.command.argument.ArgumentAbstract;
-import com.lcmcconaghy.java.transcore.entity.User;
+import com.lcmcconaghy.java.transcore.store.UserCollection;
+import com.lcmcconaghy.java.transcore.store.UserItem;
 
-public class ArgumentUser extends ArgumentAbstract<User>
+public class ArgumentUser<T extends UserItem> extends ArgumentAbstract<T>
 {
+	// { FIELDS } //
 	
-	// { SINGLETON } //
-	
-	private static ArgumentUser i = new ArgumentUser();
-	public static ArgumentUser get() { return ArgumentUser.i; }
+	private UserCollection<T> collection;
 	
 	// { CONSTRUCTOR } //
 	
-	public ArgumentUser()
+	public ArgumentUser(Class<T> arg0, UserCollection<T> arg1)
 	{
-		super(User.class);
+		super(arg0);
+		
+		this.collection = arg1;
 	}
 	
 	// { ARGUMENT } //
 	
 	@Override
-	public User read(String arg0, CommandSender arg1)
+	public T read(String arg0, CommandSender arg1)
 	{
-		return TransServer.get().getUser(arg0);
+		return collection.get(arg0);
 	}
 
 	@Override
@@ -37,9 +37,9 @@ public class ArgumentUser extends ArgumentAbstract<User>
 	{
 		List<String> usernames = new ArrayList<String>();
 		
-		for (User users : TransServer.get().getUsers())
+		for (T item : this.collection)
 		{
-			usernames.add(users.getPlayer().getName());
+			usernames.add(item.getPlayer().getName());
 		}
 		
 		return usernames;

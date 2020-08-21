@@ -13,7 +13,8 @@ import com.lcmcconaghy.java.transcore.store.transcore.TransConfig;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 
-public class StoreCollection<T extends StoreItem<T>> extends ArrayList<T> implements Init
+@SuppressWarnings("rawtypes")
+public class StoreCollection<T extends StoreItem> extends ArrayList<T> implements Init
 {
 	// { SERIAL ID } //
 	
@@ -46,6 +47,7 @@ public class StoreCollection<T extends StoreItem<T>> extends ArrayList<T> implem
 	 * @param arg0 String id of StoreItem
 	 * @return new StoreItem instance
 	 */
+	@SuppressWarnings("unchecked")
 	public T create(String arg0)
 	{
 		T ret = null;
