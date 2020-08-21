@@ -25,6 +25,10 @@ public class Config implements Init
 	public Config(Plugin arg0)
 	{
 		this.plugin = arg0;
+		
+		if (!(arg0 instanceof TransPlugin)) return;
+		
+		((TransPlugin)arg0).setTransConfig(this);
 	}
 	
 	// { INIT } //

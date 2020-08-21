@@ -7,6 +7,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.lcmcconaghy.java.transcore.store.Config;
+
 public class TransPlugin extends JavaPlugin
 {
 	
@@ -15,6 +17,8 @@ public class TransPlugin extends JavaPlugin
 	protected String name;
 	protected String version;
 	protected ConsoleCommandSender console;
+	
+	protected Config config;
 	
 	protected List<Init> initialized = new ArrayList<Init>();
 	
@@ -69,6 +73,18 @@ public class TransPlugin extends JavaPlugin
 			initialized.add(init);
 			init.initialize(true, this);
 		}
+	}
+	
+	// { CONFIG } //
+	
+	public void setTransConfig(Config arg0)
+	{
+		this.config = arg0;
+	}
+	
+	public Config getTransConfig()
+	{
+		return this.config;
 	}
 	
 	// { LOGGER } //
