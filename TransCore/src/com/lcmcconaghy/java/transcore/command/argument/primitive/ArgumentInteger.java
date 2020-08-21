@@ -14,13 +14,6 @@ public class ArgumentInteger extends ArgumentAbstract<Integer>
 	private static ArgumentInteger i = new ArgumentInteger();
 	public static ArgumentInteger get() { return ArgumentInteger.i; }
 	
-	// { CONSTRUCTOR } //
-	
-	public ArgumentInteger()
-	{
-		super(Integer.class);
-	}
-	
 	// { ARG } //
 
 	public Integer read(String arg0, CommandSender arg1)

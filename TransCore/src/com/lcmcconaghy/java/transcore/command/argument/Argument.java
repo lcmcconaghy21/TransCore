@@ -13,8 +13,6 @@ public interface Argument<T>
 	
 	public List<String> getTabCompleteList();
 	
-	public Class<T> getType();
-	
 	public String getDisplay(TransCommand arg0);
 	
 	public boolean willConcat(TransCommand arg0);

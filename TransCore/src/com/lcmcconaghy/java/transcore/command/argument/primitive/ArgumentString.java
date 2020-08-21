@@ -14,13 +14,6 @@ public class ArgumentString extends ArgumentAbstract<String>
 	private static ArgumentString i = new ArgumentString();
 	public static ArgumentString get() { return ArgumentString.i; }
 	
-	// { CONSTRUCTOR } //
-	
-	public ArgumentString()
-	{
-		super(String.class);
-	}
-	
 	// { ARG } //
 	
 	public String read(String arg0, CommandSender arg1)

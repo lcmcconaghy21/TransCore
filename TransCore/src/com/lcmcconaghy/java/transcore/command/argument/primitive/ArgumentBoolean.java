@@ -14,13 +14,6 @@ public class ArgumentBoolean extends ArgumentAbstract<Boolean>
 	private static ArgumentBoolean i = new ArgumentBoolean();
 	public static ArgumentBoolean get() { return ArgumentBoolean.i; }
 	
-	// { CONSTRUCTOR } //
-	
-	public ArgumentBoolean()
-	{
-		super(Boolean.class);
-	}
-	
 	// { ARGUMENT } //
 	
 	@Override

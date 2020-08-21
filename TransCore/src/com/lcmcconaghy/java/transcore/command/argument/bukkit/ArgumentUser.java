@@ -17,11 +17,9 @@ public class ArgumentUser<T extends UserItem> extends ArgumentAbstract<T>
 	
 	// { CONSTRUCTOR } //
 	
-	public ArgumentUser(Class<T> arg0, UserCollection<T> arg1)
+	public ArgumentUser(UserCollection<T> arg0)
 	{
-		super(arg0);
-		
-		this.collection = arg1;
+		this.collection = arg0;
 	}
 	
 	// { ARGUMENT } //

@@ -14,13 +14,6 @@ public class ArgumentDouble extends ArgumentAbstract<Double>
 	private static ArgumentDouble i = new ArgumentDouble();
 	public static ArgumentDouble get() { return ArgumentDouble.i; }
 	
-	// { CONSTRUCTOR } //
-	
-	public ArgumentDouble()
-	{
-		super(Double.class);
-	}
-	
 	// { ARGUMENT } //
 	
 	@Override
