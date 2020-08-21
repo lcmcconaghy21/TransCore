@@ -55,7 +55,12 @@ public class Message
 		colours.put("o", "\u00A7o"); // ITALIC
 	}
 	
-	public static String parse(String arg0)
+	/**
+	 * Colorize and format String
+	 * @param arg0 String to be formatted
+	 * @return formatted String
+	 */
+	public static String format(String arg0)
 	{
 		String ret = arg0;
 		
@@ -69,6 +74,11 @@ public class Message
 		return ret;
 	}
 	
+	/**
+	 * Return String parameter with first letter capitalized
+	 * @param arg0 String parameter
+	 * @return String parameter with first letter capitalized
+	 */
 	public static String upperCaseFirst(String arg0)
 	{
 		String ret = "";
@@ -86,9 +96,15 @@ public class Message
 		return ret;
 	}
 	
+	/**
+	 * Formatted, display-friendly Message
+	 * @param arg0 String display title
+	 * @param arg1 String display value
+	 * @return new display-friendly Message
+	 */
 	public static Message display(String arg0, String arg1)
 	{
-		return new Message("<a>"+upperCaseFirst(arg0)+": <b>"+arg1).parse();
+		return new Message("<a>"+upperCaseFirst(arg0)+": <b>"+arg1).format();
 	}
 	
 	// { FIELDS } //
@@ -181,7 +197,7 @@ public class Message
 	 */
 	public Message error()
 	{
-		setText(parse("<4>Error: <c>"+this.getText()));
+		setText(format("<4>Error: <c>"+this.getText()));
 		
 		return this;
 	}
@@ -198,7 +214,7 @@ public class Message
 		
 		for (String line : args)
 		{
-			builder.append(new Message(line).parse().component);
+			builder.append(new Message(line).format().component);
 		}
 		
 		this.component.setHoverEvent(new HoverEvent(net.md_5.bungee.api.chat.HoverEvent.Action.SHOW_TEXT
@@ -253,11 +269,11 @@ public class Message
 	 * Colorize Message
 	 * @return this Message
 	 */
-	public Message parse()
+	public Message format()
 	{
 		String set = this.component.getText();
 		
-		set = parse(set);
+		set = format(set);
 		
 		setText(set);
 		
@@ -310,6 +326,6 @@ public class Message
 			return;
 		}
 		
-		sender.sendMessage(Message.parse(getText()));
+		sender.sendMessage(Message.format(getText()));
 	}
 }

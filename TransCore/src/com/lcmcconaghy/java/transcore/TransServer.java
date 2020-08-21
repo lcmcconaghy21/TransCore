@@ -67,6 +67,11 @@ public class TransServer
 	
 	// { COMMANDS } //
 	
+	/**
+	 * Register type TransCommand
+	 * @param arg0 TransCommand to be registered
+	 * @return success
+	 */
 	public boolean registerCommand(TransCommand arg0)
 	{
 		if (hasCommand(arg0.getLabel()))

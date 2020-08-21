@@ -73,11 +73,15 @@ public class TransPlugin extends JavaPlugin
 	
 	// { LOGGER } //
 	
+	/**
+	 * Log Varargs in Console
+	 * @param msgs Varargs String[] messages
+	 */
 	public void log(String... msgs)
 	{
 		for (String message : msgs)
 		{
-			getConsoleLogger().sendMessage(Message.parse(message));
+			getConsoleLogger().sendMessage(Message.format(message));
 		}
 	}
 	

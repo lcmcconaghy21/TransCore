@@ -145,16 +145,27 @@ public class TransCommand implements Init
 		});
 	}
 	
+	/**
+	 * Send the CommandSender a new Message
+	 * @param arg0
+	 */
 	public void message(String arg0)
 	{
-		message(new Message(arg0).parse());
+		message(new Message(arg0).format());
 	}
 	
+	/**
+	 * Report a Message to the CommandSender
+	 * @param arg0
+	 */
 	public void error(String arg0)
 	{
 		message(new Message("<c>"+arg0).error());
 	}
 	
+	/**
+	 * @return whether User is a Player
+	 */
 	public boolean isPlayer()
 	{
 		return (sender instanceof Player);
