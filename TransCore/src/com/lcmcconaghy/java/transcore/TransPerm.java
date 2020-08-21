@@ -1,5 +1,7 @@
 package com.lcmcconaghy.java.transcore;
 
+import com.lcmcconaghy.java.transcore.util.UtilPerms;
+
 public enum TransPerm implements Perm
 {
 	
@@ -13,14 +15,7 @@ public enum TransPerm implements Perm
 	
 	TransPerm()
 	{
-		String node = this.toString().toLowerCase();
-		
-		if (node.contains("_"))
-		{
-			node = node.replaceAll("_", ".");
-		}
-		
-		this.node = node;
+		this.node = UtilPerms.toNode(this, TransCore.get());
 	}
 	
 	// { PERM } //
