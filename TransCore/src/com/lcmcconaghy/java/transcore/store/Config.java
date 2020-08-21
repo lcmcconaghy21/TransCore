@@ -44,7 +44,9 @@ public class Config implements Init
 	@Override
 	public boolean isInitialized()
 	{
-		return true;
+		if (this.plugin!=null && this.yaml!=null) return true;
+		
+		return false;
 	}
 	
 	// { LOAD } //
