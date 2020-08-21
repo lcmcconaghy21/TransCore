@@ -38,6 +38,19 @@ public class Config implements Init
 	{
 		if (!arg0) return;
 		
+		load();
+	}
+
+	@Override
+	public boolean isInitialized()
+	{
+		return true;
+	}
+	
+	// { LOAD } //
+	
+	public void load()
+	{
 		File src = new File(plugin.getDataFolder().getPath()+File.separator+"config.yml");
 		
 		if (!src.getParentFile().exists()) src.getParentFile().mkdirs();
@@ -90,12 +103,6 @@ public class Config implements Init
 				e.printStackTrace();
 			}
 		}
-	}
-
-	@Override
-	public boolean isInitialized()
-	{
-		return true;
 	}
 	
 }
