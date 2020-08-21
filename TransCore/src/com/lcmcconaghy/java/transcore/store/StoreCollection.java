@@ -26,18 +26,17 @@ public class StoreCollection<T extends StoreItem> extends ArrayList<T> implement
 	private String path;
 	
 	private String id;
-	private DatabaseType database;
+	private DatabaseType database = DatabaseType.FLATFILE;
 	private Class<T> type;
 	
 	private DBCollection coll;
 	
 	// { CONSTRUCTOR } //
 	
-	public StoreCollection(String arg0, DatabaseType arg1, Class<T> arg2)
+	public StoreCollection(String arg0, Class<T> arg1)
 	{
 		this.id = arg0;
-		this.database = arg1;
-		this.type = arg2;
+		this.type = arg1;
 	}
 	
 	// { MANAGEMENT } //
@@ -133,6 +132,11 @@ public class StoreCollection<T extends StoreItem> extends ArrayList<T> implement
 		
 		this.plugin = arg1;
 		this.path = arg1.getDataFolder().getPath()+File.separator+this.id;
+		
+		if (TransServer.get().isMongoEnabled())
+		{
+			this.database = DatabaseType.MONGO;
+		}
 		
 		File src = new File(path);
 		

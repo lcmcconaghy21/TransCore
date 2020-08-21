@@ -14,9 +14,9 @@ public class UserCollection<T extends UserItem> extends StoreCollection<T>
 	
 	// { CONSTRUCTOR } //
 
-	public UserCollection(String arg0, DatabaseType arg1, Class<T> arg2)
+	public UserCollection(String arg0, Class<T> arg1)
 	{
-		super(arg0, arg1, arg2);
+		super(arg0, arg1);
 	}
 	
 	// { CREATE } //
