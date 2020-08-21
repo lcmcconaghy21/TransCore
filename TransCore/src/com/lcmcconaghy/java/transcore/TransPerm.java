@@ -10,6 +10,8 @@ public enum TransPerm implements Perm
 	UPDATE_BUILD,
 	UPDATE_REVISION,
 	
+	RELOAD,
+	
 	VERSION;
 	
 	// { FIELDS } //
