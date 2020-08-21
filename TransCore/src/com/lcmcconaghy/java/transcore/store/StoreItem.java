@@ -1,6 +1,7 @@
 package com.lcmcconaghy.java.transcore.store;
 
 import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Field;
 
 import com.lcmcconaghy.java.transcore.TransServer;
@@ -25,7 +26,22 @@ public class StoreItem<T extends StoreItem<T>>
 	{
 		if (getStore().getDatabaseType()==DatabaseType.FLATFILE)
 		{
-			Json data = new Json(new File(store.getPath()));
+			File src = new File(store.getPath());
+			
+			if (!src.getParentFile().exists()) src.getParentFile().mkdirs();
+			if (!src.exists())
+			{
+				try
+				{
+					src.createNewFile();
+				}
+				catch (IOException e)
+				{
+					e.printStackTrace();
+				}
+			}
+			
+			Json data = new Json(src);
 			
 			for (Field fields : this.getClass().getDeclaredFields())
 			{

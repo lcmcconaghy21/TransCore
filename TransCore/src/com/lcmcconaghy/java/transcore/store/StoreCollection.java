@@ -132,6 +132,13 @@ public class StoreCollection<T extends StoreItem<T>> extends ArrayList<T> implem
 		this.plugin = arg1;
 		this.path = arg1.getDataFolder().getPath()+File.separator+this.id;
 		
+		File src = new File(path);
+		
+		if (!src.exists())
+		{
+			src.mkdirs();
+		}
+		
 		if (!TransConfig.get().willUseMongo()) return;
 		
 		DB database = TransServer.get().getDatabase(this.plugin.getName());

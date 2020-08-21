@@ -1,5 +1,6 @@
 package com.lcmcconaghy.java.transcore.store.transcore;
 
+import com.lcmcconaghy.java.transcore.TransCore;
 import com.lcmcconaghy.java.transcore.store.Config;
 
 public class TransConfig extends Config
@@ -9,6 +10,13 @@ public class TransConfig extends Config
 	
 	private static TransConfig i = new TransConfig();
 	public static TransConfig get() { return TransConfig.i; }
+	
+	// { CONSTRUCTOR } //
+	
+	public TransConfig()
+	{
+		super(TransCore.get());
+	}
 	
 	// { FIELDS } //
 	
