@@ -4,6 +4,7 @@ import org.apache.commons.lang.StringUtils;
 
 import com.lcmcconaghy.java.transcore.Message;
 import com.lcmcconaghy.java.transcore.TransPlugin;
+import com.lcmcconaghy.java.transcore.exception.TransCommandException;
 
 public class TransCommandVersion extends TransCommand
 {

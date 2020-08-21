@@ -1,6 +1,7 @@
 package com.lcmcconaghy.java.transcore.command;
 
 import com.lcmcconaghy.java.transcore.command.argument.primitive.ArgumentInteger;
+import com.lcmcconaghy.java.transcore.exception.TransCommandException;
 import com.lcmcconaghy.java.transcore.pager.PagerHelpCommand;
 
 public class TransCommandHelp extends TransCommand

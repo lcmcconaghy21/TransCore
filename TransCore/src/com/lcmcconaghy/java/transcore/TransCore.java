@@ -1,8 +1,8 @@
 package com.lcmcconaghy.java.transcore;
 
 import com.lcmcconaghy.java.transcore.cmd.CmdTransCore;
-import com.lcmcconaghy.java.transcore.command.TransCommandException;
 import com.lcmcconaghy.java.transcore.engine.EnginePlayer;
+import com.lcmcconaghy.java.transcore.exception.TransCommandException;
 import com.lcmcconaghy.java.transcore.store.transcore.TransConfig;
 
 public class TransCore extends TransPlugin

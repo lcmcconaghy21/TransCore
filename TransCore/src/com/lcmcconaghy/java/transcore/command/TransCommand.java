@@ -18,6 +18,7 @@ import com.lcmcconaghy.java.transcore.TransPlugin;
 import com.lcmcconaghy.java.transcore.TransServer;
 import com.lcmcconaghy.java.transcore.command.argument.Argument;
 import com.lcmcconaghy.java.transcore.command.argument.ArgumentAbstract;
+import com.lcmcconaghy.java.transcore.exception.TransCommandException;
 
 public class TransCommand implements Init
 {

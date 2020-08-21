@@ -1,4 +1,4 @@
-package com.lcmcconaghy.java.transcore.command;
+package com.lcmcconaghy.java.transcore.exception;
 
 public class TransCommandException extends Exception
 {
