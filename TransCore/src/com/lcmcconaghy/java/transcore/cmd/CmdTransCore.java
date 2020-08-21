@@ -14,6 +14,7 @@ public class CmdTransCore extends TransCommand
 	{
 		super("transcore", "trans");
 		
+		this.addSubCommand(new CmdUpdate());
 		this.addSubCommand(new TransCommandVersion(TransCore.get()));
 	}
 	

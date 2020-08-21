@@ -102,6 +102,16 @@ public class TransConfig extends Config
 	}
 	
 	/**
+	 * @return String current Server version
+	 */
+	public String getLatestVersion()
+	{
+		int latest = getVersions().size()-1;
+		
+		return getVersions().get(latest-1);
+	}
+	
+	/**
 	 * @return String versions with corresponding List of String patch notes
 	 */
 	public Map<String, List<String>> getVersionMap()
