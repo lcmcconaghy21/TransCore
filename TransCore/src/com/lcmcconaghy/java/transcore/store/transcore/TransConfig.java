@@ -126,7 +126,7 @@ public class TransConfig extends Config
 	{
 		int latest = getVersions().size()-1;
 		
-		return getVersions().get(latest-1);
+		return getVersions().get(latest);
 	}
 	
 	/**
