@@ -164,6 +164,11 @@ public class TransServer
 		this.users.put(arg0.getPlayer().getUniqueId(), arg0);
 	}
 	
+	public void unregisterUser(User arg0)
+	{
+		this.users.remove(arg0.getPlayer().getUniqueId());
+	}
+	
 	public Collection<User> getUsers()
 	{
 		return this.users.values();

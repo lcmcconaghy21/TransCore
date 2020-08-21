@@ -24,6 +24,16 @@ public class User
 		arg0.send(this);
 	}
 	
+	// { NPC } //
+	
+	/**
+	 * @return whether User is NPC
+	 */
+	public boolean isNpc()
+	{
+		return player.hasMetadata("NPC");
+	}
+	
 	// { GETTERS } //
 	
 	/**
