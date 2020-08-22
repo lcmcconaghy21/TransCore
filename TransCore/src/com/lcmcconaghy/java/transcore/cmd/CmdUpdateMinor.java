@@ -44,7 +44,7 @@ public class CmdUpdateMinor extends TransCommand
 		VersionUpdateEvent versionUpdate = new VersionUpdateEvent(latest, update);
 		versionUpdate.run();
 		
-		TransConfig.get().patch(minorString, list.toArray(new String[list.size()]));
+		TransConfig.get().patch(update, list.toArray(new String[list.size()]));
 		
 		message("<a>Version <d>"+update+" <a>has been loaded!");
 	}
