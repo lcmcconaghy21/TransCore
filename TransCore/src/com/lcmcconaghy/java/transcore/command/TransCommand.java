@@ -199,6 +199,8 @@ public class TransCommand implements Init
 	{
 		if (!arg0) return;
 		
+		this.plugin = arg1;
+		
 		if (this.isParent())
 		{
 			try
