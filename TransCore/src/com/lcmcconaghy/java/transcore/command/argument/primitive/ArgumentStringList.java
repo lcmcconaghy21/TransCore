@@ -29,6 +29,15 @@ public class ArgumentStringList extends ArgumentAbstract<List<String>>
 			return ret;
 		}
 		
+		if (arg0.startsWith(","))
+		{
+			arg0.substring(1);
+		}
+		if (arg0.endsWith(","))
+		{
+			arg0.substring(0, arg0.length()-1);
+		}
+		
 		for (String part : arg0.split(","))
 		{
 			ret.add(part);
