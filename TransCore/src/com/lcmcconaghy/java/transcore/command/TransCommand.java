@@ -75,8 +75,15 @@ public class TransCommand implements Init
 		{
 			if (this.getHelpCommand()==null)
 			{
-				error("Help command is null, please contact the developer.");
-				return;
+				try
+				{
+					this.help = new TransCommandHelp(this);
+					this.addSubCommand(help);
+				}
+				catch (TransCommandException e)
+				{
+					e.printStackTrace();
+				}
 			}
 			
 			if (args.length==0)
@@ -296,6 +303,11 @@ public class TransCommand implements Init
 		if (arguments==null || arguments.size()<=0)
 		{
 			throw new TransCommandException("Arguments are null, cannot read them dimwit.");
+		}
+		if (args.length<=tracer)
+		{
+			error("This command requires more arguments in order to be performed.");
+			throw new TransCommandException("Unable to parse. Too few arguments.");
 		}
 		
 		Argument<T> arg = (Argument<T>) getNextArgument();
