@@ -19,12 +19,15 @@ public class Config implements Init
 	
 	private Yaml yaml;
 	private Plugin plugin;
+	File src;
 	
 	// { CONSTRUCTOR } //
 	
 	public Config(Plugin arg0)
 	{
 		this.plugin = arg0;
+		this.src = new File(plugin.getDataFolder().getPath()+File.separator+"config.yml");
+		this.yaml = new Yaml(src);
 		
 		if (!(arg0 instanceof TransPlugin)) return;
 		
@@ -36,7 +39,11 @@ public class Config implements Init
 	@Override
 	public void initialize(boolean arg0, TransPlugin arg1)
 	{
-		if (!arg0) return;
+		if (!arg0)
+		{
+			save();
+			return;
+		}
 		
 		load();
 	}
@@ -53,8 +60,6 @@ public class Config implements Init
 	
 	public void load()
 	{
-		File src = new File(plugin.getDataFolder().getPath()+File.separator+"config.yml");
-		
 		if (!src.getParentFile().exists()) src.getParentFile().mkdirs();
 		
 		if (!src.exists())
@@ -68,8 +73,6 @@ public class Config implements Init
 				e.printStackTrace();
 			}
 		}
-		
-		yaml = new Yaml(src);
 		
 		for (Field fields : this.getClass().getDeclaredFields())
 		{
@@ -104,6 +107,29 @@ public class Config implements Init
 			{
 				e.printStackTrace();
 			}
+		}
+	}
+	
+	// { SAVE } //
+	
+	public void save()
+	{
+		for (Field fields : this.getClass().getDeclaredFields())
+		{
+			if (Modifier.isStatic(fields.getModifiers())) continue;
+			
+			Object value = null;
+			
+			try
+			{
+				value = fields.get(this);
+			}
+			catch (IllegalArgumentException | IllegalAccessException e)
+			{
+				e.printStackTrace();
+			}
+			
+			yaml.set(fields.getName(), value);
 		}
 	}
 	
