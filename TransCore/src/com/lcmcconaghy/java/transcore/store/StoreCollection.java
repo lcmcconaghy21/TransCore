@@ -1,6 +1,8 @@
 package com.lcmcconaghy.java.transcore.store;
 
 import java.io.File;
+import java.io.IOException;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -9,9 +11,10 @@ import org.bukkit.plugin.Plugin;
 import com.lcmcconaghy.java.transcore.Init;
 import com.lcmcconaghy.java.transcore.TransPlugin;
 import com.lcmcconaghy.java.transcore.TransServer;
-import com.lcmcconaghy.java.transcore.store.transcore.TransConfig;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
+
+import de.leonhard.storage.Json;
 
 @SuppressWarnings("rawtypes")
 public class StoreCollection<T extends StoreItem> extends ArrayList<T> implements Init
@@ -64,6 +67,8 @@ public class StoreCollection<T extends StoreItem> extends ArrayList<T> implement
 		ret.store = this;
 		add(ret);
 		
+		save(ret);
+		
 		return ret;
 	}
 	
@@ -98,6 +103,96 @@ public class StoreCollection<T extends StoreItem> extends ArrayList<T> implement
 	
 	// { DATABASE } //
 	
+	/**
+	 * Load StoreItem from File
+	 * @param src File to load StoreItem from
+	 * @return a StoreItem
+	 */
+	@SuppressWarnings("unchecked")
+	public T load(File src)
+	{
+		T ret = null;
+		try
+		{
+			ret = this.type.newInstance();
+		}
+		catch (InstantiationException | IllegalAccessException e)
+		{
+			e.printStackTrace();
+		}
+		
+		Json json = new Json(src);
+		
+		ret.id = json.getFile().getName();
+		
+		for (Field declared : ret.getClass().getDeclaredFields())
+		{
+			declared.setAccessible(true);
+			
+			try
+			{
+				declared.set(ret, json.get(declared.getName()));
+			}
+			catch (IllegalArgumentException | IllegalAccessException e)
+			{
+				e.printStackTrace();
+			}
+		}
+		
+		return ret;
+	}
+	
+	/**
+	 * Save the entire Collection
+	 */
+	public void save()
+	{
+		for (T item : this)
+		{
+			save(item);
+		}
+	}
+	
+	/**
+	 * Save a singular StoreItem
+	 * @param arg0 StoreItem to be saved
+	 */
+	public void save(T arg0)
+	{
+		File src = new File(path+File.separator+arg0.id+".json");
+		
+		if (!src.exists())
+		{
+			try
+			{
+				src.createNewFile();
+			}
+			catch (IOException e)
+			{
+				e.printStackTrace();
+			}
+		}
+		
+		Json json = new Json(src);
+		
+		for (Field defined : arg0.getClass().getDeclaredFields())
+		{
+			defined.setAccessible(true);
+			
+			Object value = null;
+			try
+			{
+				value = defined.get(arg0);
+			}
+			catch (IllegalArgumentException | IllegalAccessException e)
+			{
+				e.printStackTrace();
+			}
+			
+			json.set(defined.getName(), value);
+		}
+	}
+	
 	public String getID()
 	{
 		return this.id;
@@ -128,10 +223,16 @@ public class StoreCollection<T extends StoreItem> extends ArrayList<T> implement
 	@Override
 	public void initialize(boolean arg0, TransPlugin arg1)
 	{
-		if (!arg0) return;
+		if (!arg0)
+		{
+			save();
+			return;
+		}
 		
 		this.plugin = arg1;
 		this.path = arg1.getDataFolder().getPath()+File.separator+this.id;
+		
+		TransServer.get().registerCollection(this);
 		
 		if (TransServer.get().isMongoEnabled())
 		{
@@ -145,7 +246,17 @@ public class StoreCollection<T extends StoreItem> extends ArrayList<T> implement
 			src.mkdirs();
 		}
 		
-		if (!TransConfig.get().willUseMongo()) return;
+		if (!TransServer.get().isMongoEnabled())
+		{
+			for (File sub : src.listFiles())
+			{
+				if (!sub.getName().endsWith(".json")) continue;
+				
+				add( load(sub) );
+			}
+			
+			return;
+		}
 		
 		DB database = TransServer.get().getDatabase(this.plugin.getName());
 		this.coll = database.getCollection(id);
