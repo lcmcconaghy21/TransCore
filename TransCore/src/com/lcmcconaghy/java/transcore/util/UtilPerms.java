@@ -2,7 +2,7 @@ package com.lcmcconaghy.java.transcore.util;
 
 import org.bukkit.plugin.Plugin;
 
-import com.lcmcconaghy.java.transcore.Perm;
+import com.lcmcconaghy.java.transcore.PermissionBase;
 
 public class UtilPerms
 {
@@ -11,11 +11,11 @@ public class UtilPerms
 	
 	/**
 	 * Transform Perm to String permission node
-	 * @param arg0 Perm to be transformed
+	 * @param arg0 PermissionBase to be transformed
 	 * @param arg1 Plugin of the Permission
 	 * @return new Permission node
 	 */
-	public static String toNode(Perm arg0, Plugin arg1)
+	public static String toNode(PermissionBase arg0, Plugin arg1)
 	{
 		String node = arg1.getName().toLowerCase()+"."+arg0.toString();
 		

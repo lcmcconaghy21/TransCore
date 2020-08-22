@@ -2,7 +2,7 @@ package com.lcmcconaghy.java.transcore;
 
 import com.lcmcconaghy.java.transcore.util.UtilPerms;
 
-public enum TransPerm implements Perm
+public enum TransPerm implements PermissionBase
 {
 	
 	UPDATE_MAJOR,

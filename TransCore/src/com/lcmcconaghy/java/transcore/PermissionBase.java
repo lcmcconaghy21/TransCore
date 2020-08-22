@@ -1,6 +1,6 @@
 package com.lcmcconaghy.java.transcore;
 
-public interface Perm
+public interface PermissionBase
 {
 	/**
 	 * @return String Permission node
