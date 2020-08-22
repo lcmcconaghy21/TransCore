@@ -1,5 +1,21 @@
 name: TransCore
 version: 1.0.0_BETA
 main: com.lcmcconaghy.java.transcore.TransCore
+description: <d>TransCore <b>is an easily adaptable, customizable plugin that aids in plugin development.
+softdepend: [Vault]
+load: STARTUP
 authors: [Ironhippy]
 api-version: 1.13
+permissions:
+  transcore.*:
+    description: Provide access to all TransCore commands
+    children:
+      transcore.update: true
+      transcore.version: true
+  transcore.update:
+    description: Provide access to update the TransCore plugin
+    children:
+      transcore.update.major: true
+      transcore.update.minor: true
+      transcore.update.build: true
+      transcore.update.revision: true
