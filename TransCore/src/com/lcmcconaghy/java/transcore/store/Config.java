@@ -116,6 +116,8 @@ public class Config implements Init
 	{
 		for (Field fields : this.getClass().getDeclaredFields())
 		{
+			fields.setAccessible(true);
+			
 			if (Modifier.isStatic(fields.getModifiers())) continue;
 			
 			Object value = null;
