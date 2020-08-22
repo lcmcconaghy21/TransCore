@@ -8,6 +8,8 @@ import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 
 import com.lcmcconaghy.java.transcore.Message;
+import com.lcmcconaghy.java.transcore.store.StoreCollection;
+import com.lcmcconaghy.java.transcore.store.StoreItem;
 
 import net.md_5.bungee.api.ChatColor;
 
@@ -44,6 +46,24 @@ public class UtilGeneral
 	public static String listify(String arg0, String[] args)
 	{
 		return StringUtils.join(args, arg0);
+	}
+	
+	/**
+	 * Get List of IDS from a StoreCollection
+	 * @param <T> Object extending StoreItem
+	 * @param coll StoreCollection of Generic Type T
+	 * @return new String List
+	 */
+	public static <T extends StoreItem<T>> List<String> list(StoreCollection<T> coll)
+	{
+		List<String> ret = new ArrayList<String>();
+		
+		for (T part : coll)
+		{
+			ret.add(part.getID());
+		}
+		
+		return ret;
 	}
 	
 	// { COLLECTION } //
