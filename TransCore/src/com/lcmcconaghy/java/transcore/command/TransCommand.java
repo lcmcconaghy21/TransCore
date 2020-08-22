@@ -12,7 +12,7 @@ import org.bukkit.plugin.Plugin;
 
 import com.lcmcconaghy.java.transcore.Init;
 import com.lcmcconaghy.java.transcore.Message;
-import com.lcmcconaghy.java.transcore.Perm;
+import com.lcmcconaghy.java.transcore.PermissionBase;
 import com.lcmcconaghy.java.transcore.TransCore;
 import com.lcmcconaghy.java.transcore.TransPlugin;
 import com.lcmcconaghy.java.transcore.TransServer;
@@ -229,7 +229,7 @@ public class TransCommand implements Init
 	 * Set permission for command
 	 * @param arg0 Perm permission
 	 */
-	public void setPerm(Perm arg0)
+	public void setPerm(PermissionBase arg0)
 	{
 		this.permission = arg0.getNode();
 	}
