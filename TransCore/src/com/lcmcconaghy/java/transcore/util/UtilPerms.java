@@ -21,7 +21,7 @@ public class UtilPerms
 		
 		if (node.contains("_"))
 		{
-			node = node.replaceAll("_", ".");
+			node = node.replaceAll("_", "\\.");
 		}
 		
 		return node;
