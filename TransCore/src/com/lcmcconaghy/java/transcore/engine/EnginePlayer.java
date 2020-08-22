@@ -3,9 +3,11 @@ package com.lcmcconaghy.java.transcore.engine;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 
 import com.lcmcconaghy.java.transcore.TransServer;
 import com.lcmcconaghy.java.transcore.store.UserCollection;
+import com.lcmcconaghy.java.transcore.store.transcore.IUser;
 
 public class EnginePlayer extends Engine
 {
@@ -28,4 +30,11 @@ public class EnginePlayer extends Engine
 		}
 	}
 	
+	@EventHandler
+	public void updateVersionPlayer(PlayerQuitEvent event)
+	{
+		IUser user = IUser.get(event.getPlayer());
+		
+		user.setLastVersion();
+	}
 }

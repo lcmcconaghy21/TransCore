@@ -2,10 +2,16 @@ package com.lcmcconaghy.java.transcore.store.transcore;
 
 import java.util.List;
 
+import org.bukkit.entity.Player;
+
 import com.lcmcconaghy.java.transcore.store.UserItem;
 
 public class IUser extends UserItem
 {
+	
+	// { STATIC } //
+	
+	public static IUser get(Player arg0) { return IUserCollection.get().get(arg0); }
 	
 	// { FIELDS } //
 	
