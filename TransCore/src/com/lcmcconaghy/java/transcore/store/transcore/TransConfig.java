@@ -86,9 +86,9 @@ public class TransConfig extends Config
 	{
 		String motd = this.serverMOTD;
 		
-		if (motd.contains("{$config.version}"))
+		if (motd.contains("\\{$config.version\\}"))
 		{
-			motd.replaceAll("{$config.version}", getLatestVersion());
+			motd.replaceAll("\\{$config.version\\}", getLatestVersion());
 		}
 		
 		return Message.format(motd);
