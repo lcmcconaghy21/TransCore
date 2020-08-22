@@ -33,7 +33,7 @@ public class CmdUpdateMajor extends TransCommand
 		
 		String latest = TransConfig.get().getLatestVersion();
 		
-		String[] parts = latest.split(".");
+		String[] parts = latest.split("\\.");
 		
 		int newMajor = Integer.parseInt(parts[0])+1;
 		

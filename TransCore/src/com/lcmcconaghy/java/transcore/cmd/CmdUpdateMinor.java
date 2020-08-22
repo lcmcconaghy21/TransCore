@@ -33,13 +33,13 @@ public class CmdUpdateMinor extends TransCommand
 		
 		String latest = TransConfig.get().getLatestVersion();
 		
-		String[] parts = latest.split(".");
+		String[] parts = latest.split("\\.");
 		
 		String minorString = parts[1];
 		
 		int minor = Integer.parseInt(minorString)+1;
 		
-		String update = parts[0]+minor+".0.0";
+		String update = parts[0]+"."+minor+".0.0";
 		
 		VersionUpdateEvent versionUpdate = new VersionUpdateEvent(latest, update);
 		versionUpdate.run();

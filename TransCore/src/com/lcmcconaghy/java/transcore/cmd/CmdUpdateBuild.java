@@ -33,7 +33,10 @@ public class CmdUpdateBuild extends TransCommand
 		String[] patches = patchNotes.toArray(new String[patchNotes.size()]);
 		
 		String latest = TransConfig.get().getLatestVersion();
-		String[] parts = latest.split(".");
+		String[] parts = latest.split("\\.");
+		
+		System.out.println(latest);
+		System.out.println(parts.length);
 		
 		int build = Integer.parseInt(parts[2])+1;
 		parts[2] = build+"";
