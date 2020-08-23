@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import com.lcmcconaghy.java.transcore.command.TransCommand;
 import com.lcmcconaghy.java.transcore.store.UserItem;
 import com.lcmcconaghy.java.transcore.util.UtilGeneral;
+import com.lcmcconaghy.java.transcore.util.UtilMaths;
 
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.ClickEvent;
@@ -226,6 +227,34 @@ public class Message
 	public Message error()
 	{
 		setText(format("<4>Error: <c>"+this.getText()));
+		
+		return this;
+	}
+	
+	/**
+	 * Obfuscate Message
+	 * @param arg0 actual distance, minus inner
+	 * @param arg1 difference between inner and outer
+	 * @return this Message
+	 */
+	public Message obfuscate(int arg0, int arg1)
+	{
+		String complete = "";
+		
+		for (char part : this.component.getText().toCharArray())
+		{
+			int chance = UtilMaths.randomInt(arg1);
+			
+			if (arg0<=0 || chance>=arg1)
+			{
+				complete += part;
+				continue;
+			}
+				
+			complete += '-';
+		}
+		
+		this.setText(complete);
 		
 		return this;
 	}
