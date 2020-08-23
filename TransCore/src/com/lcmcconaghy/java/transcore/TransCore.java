@@ -46,7 +46,7 @@ public class TransCore extends TransPlugin
 	}
 
 	@Override
-	public List<Serializable<?>> getSerializables()
+	public List<Serializable<?>> getAdapters()
 	{
 		return UtilGeneral.list(SerializablePlayer.get());
 	}

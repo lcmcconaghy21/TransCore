@@ -25,7 +25,7 @@ public interface TPlugin
 	 * Place all serializables in here
 	 * @return List of all Serializables
 	 */
-	public List<Serializable<?>> getSerializables();
+	public List<Serializable<?>> getAdapters();
 	
 	/**
 	 * Place all StoreCollections in here

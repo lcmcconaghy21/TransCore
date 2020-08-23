@@ -42,7 +42,9 @@ public abstract class TransPlugin extends JavaPlugin implements TPlugin
 	@Override
 	public void onEnable()
 	{
+		log("<e>Registering <b>"+getAdapters().size()+" <e>Adapters...");
 		registerAdapters();
+		log("<e>");
 		
 		registerCollections();
 		
@@ -128,9 +130,9 @@ public abstract class TransPlugin extends JavaPlugin implements TPlugin
 	 */
 	public void registerAdapters()
 	{
-		if (getSerializables() == null) return;
+		if (getAdapters() == null) return;
 		
-		for (Serializable<?> serializable : getSerializables())
+		for (Serializable<?> serializable : getAdapters())
 		{
 			serializable.initialize(true, this);
 		}
