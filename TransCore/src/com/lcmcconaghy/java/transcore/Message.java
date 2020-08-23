@@ -12,6 +12,7 @@ import com.lcmcconaghy.java.transcore.util.UtilGeneral;
 import com.lcmcconaghy.java.transcore.util.UtilMaths;
 
 import net.md_5.bungee.api.ChatColor;
+import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ClickEvent.Action;
 import net.md_5.bungee.api.chat.ComponentBuilder;
@@ -249,13 +250,13 @@ public class Message
 	 * @param arg1 difference between inner and outer
 	 * @return this Message
 	 */
-	public Message obfuscate(int arg0, int arg1)
+	public Message obfuscate(double arg0, double arg1)
 	{
 		String complete = "";
 		
 		for (char part : this.component.getText().toCharArray())
 		{
-			int chance = UtilMaths.randomInt(arg1);
+			int chance = UtilMaths.randomInt((int)arg1);
 			
 			if (arg0<=0 || chance>=arg1)
 			{
@@ -349,6 +350,42 @@ public class Message
 		return this;
 	}
 	
+	/**
+	 * Check whether this Message contains a String
+	 * @param arg0 String to be checked for
+	 * @return whether the String is contained in this Message
+	 */
+	public boolean contains(String arg0)
+	{
+		return (this.getText().contains(arg0));
+	}
+	
+	/**
+	 * Check whether this Message contains another Message
+	 * @param arg0 Message to be checked for
+	 * @return whether this Message contains the parameter Message
+	 */
+	public boolean contains(Message arg0)
+	{
+		boolean ret = false;
+		
+		for (BaseComponent part : this.component.getExtra())
+		{
+			if (!arg0.component.equals(part)) continue;
+			
+			ret = true;
+			break;
+		}
+		
+		return ret;
+	}
+	
+	/**
+	 * Replace a String with a Message
+	 * @param arg0 String to be replaced
+	 * @param arg1 Message to be inserted in its place
+	 * @return new replaced Message
+	 */
 	public Message replace(String arg0, Message arg1)
 	{
 		String text = getText();
