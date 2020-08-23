@@ -156,14 +156,26 @@ public class Message
 	{
 		String text = getText();
 		
-		if (text.contains(" "))
+		String[] ret = new String[0];
+		
+		if (text.contains(" ") && text.contains(","))
 		{
-			return text.split(" ");
+			ret = text.split(" |\\.| ,|, | , ");
 		}
-		
-		String[] ret = new String[1];
-		
-		ret[0] = text;
+		else if (text.contains(" "))
+		{
+			ret = text.split(" ");
+		}
+		else if (text.contains(","))
+		{
+			ret = text.split(",");
+		}
+		else if (!text.contains(" ") && !text.contains(","))
+		{
+			ret = new String[1];
+			ret[0] = text;
+			return ret;
+		}
 		
 		return ret;
 	}
