@@ -1,15 +1,20 @@
 package com.lcmcconaghy.java.transcore;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.lcmcconaghy.java.transcore.command.TransCommand;
+import com.lcmcconaghy.java.transcore.engine.Engine;
 import com.lcmcconaghy.java.transcore.store.Config;
+import com.lcmcconaghy.java.transcore.store.StoreCollection;
+import com.lcmcconaghy.java.transcore.store.serializable.Serializable;
 
-public class TransPlugin extends JavaPlugin
+public abstract class TransPlugin extends JavaPlugin implements TPlugin
 {
 	
 	// { FIELDS } //
@@ -20,7 +25,7 @@ public class TransPlugin extends JavaPlugin
 	
 	protected Config config;
 	
-	protected List<Init> initialized = new ArrayList<Init>();
+	protected Map<Class<Init>, List<Init>> initialized = new HashMap<Class<Init>,List<Init>>();
 	
 	// { CONSTRUCTOR } //
 	
@@ -37,17 +42,17 @@ public class TransPlugin extends JavaPlugin
 	@Override
 	public void onEnable()
 	{
-		startup();
-	}
-	
-	public void startup()
-	{
-		// THIS IS WHERE YOU PUT YOUR CODE
-	}
-	
-	public void disable()
-	{
-		// THIS IS WHERE YOU PUT YOUR CODE
+		registerAdapters();
+		
+		registerCollections();
+		
+		registerConfig();
+		
+		registerCommands();
+		
+		registerEngines();
+		
+		this.startup();
 	}
 	
 	// { DISABLE } //
@@ -56,9 +61,12 @@ public class TransPlugin extends JavaPlugin
 	{
 		super.onDisable();
 		
-		for (Init init : this.initialized)
+		for (List<Init> inits : this.initialized.values())
 		{
-			init.initialize(false, this);
+			for (Init init : inits)
+			{
+				init.initialize(false, this);
+			}
 		}
 		
 		this.disable();
@@ -66,12 +74,65 @@ public class TransPlugin extends JavaPlugin
 	
 	// { INIT } //
 	
-	public void initialize(Init... inits)
+	/**
+	 * Register commands
+	 */
+	public void registerCommands()
 	{
-		for (Init init : inits)
+		if (getTransCommands() == null) return;
+		
+		for (TransCommand arg : getTransCommands())
 		{
-			initialized.add(init);
-			init.initialize(true, this);
+			arg.initialize(true, this);
+		}
+	}
+	
+	/**
+	 * Register Event Engines
+	 */
+	public void registerEngines()
+	{
+		if (getEngines() == null) return;
+		
+		for (Engine arg : getEngines())
+		{
+			arg.initialize(true, this);
+		}
+	}
+	
+	/**
+	 * Register single Config instance
+	 */
+	public void registerConfig()
+	{
+		if (getTransConfig() == null) return;
+		
+		getTransConfig().initialize(true, this);
+	}
+	
+	/**
+	 * Register serializable data collections
+	 */
+	public void registerCollections()
+	{
+		if (getStoreCollections() == null) return;
+		
+		for (StoreCollection<?> collection : getStoreCollections())
+		{
+			collection.initialize(true, this);
+		}
+	}
+	
+	/**
+	 * Register serializables
+	 */
+	public void registerAdapters()
+	{
+		if (getSerializables() == null) return;
+		
+		for (Serializable<?> serializable : getSerializables())
+		{
+			serializable.initialize(true, this);
 		}
 	}
 	
