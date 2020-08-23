@@ -75,6 +75,8 @@ public abstract class TransPlugin extends JavaPlugin implements TPlugin
 		separate();
 		
 		this.startup();
+		
+		log("<a>Finished loading <b>"+this.name+" v"+this.version+"<a>!");
 	}
 	
 	// { DISABLE } //
