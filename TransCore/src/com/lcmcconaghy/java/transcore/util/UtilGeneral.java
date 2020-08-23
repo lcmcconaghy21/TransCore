@@ -19,11 +19,15 @@ public class UtilGeneral
 	
 	public static Message titleize(String arg)
 	{
-		String side = repeat("=", 13-(arg.length()/2));
+		int times = 13-(arg.length()/2);
 		
-		return new Message(new Message(side+"<{ ").color(ChatColor.GREEN),
-				           new Message(arg).color(ChatColor.AQUA),
-				           new Message(" }>"+side).color(ChatColor.GREEN));
+		if (times<=0) times = 0;
+		
+		String side = repeat("=", times);
+		
+		return new Message(arg).color(ChatColor.AQUA)
+				               .insert("<a>"+side+"<{ ")
+				               .append(" <a>}>"+side);
 	}
 	
 	public static String repeat(String arg0, int arg1)
