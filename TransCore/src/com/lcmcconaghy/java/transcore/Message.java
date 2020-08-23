@@ -349,6 +349,15 @@ public class Message
 		return this;
 	}
 	
+	public Message replace(String arg0, Message arg1)
+	{
+		String text = getText();
+		
+		String[] parts = text.split(arg0);
+		
+		return new Message(new Message(parts[0]), arg1, this.setText(parts[1]));
+	}
+	
 	/**
 	 * Place text before current String text
 	 * @param arg0 String text to place before
