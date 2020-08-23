@@ -205,7 +205,7 @@ public abstract class TransPlugin extends JavaPlugin implements TPlugin
 	 */
 	public void separate()
 	{
-		log("<7>-------------------------------------------------");
+		log("<7>-----------------------------------------------");
 	}
 	
 	public ConsoleCommandSender getConsoleLogger()
