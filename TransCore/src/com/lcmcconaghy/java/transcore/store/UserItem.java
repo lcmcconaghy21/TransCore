@@ -7,6 +7,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
 import com.lcmcconaghy.java.transcore.Message;
+import com.lcmcconaghy.java.transcore.TransLocation;
 
 public class UserItem extends StoreItem<UserItem>
 {
@@ -30,6 +31,37 @@ public class UserItem extends StoreItem<UserItem>
 	}
 	
 	// { LOCATION } //
+	
+	/**
+	 * Distance between
+	 * @param arg0
+	 * @return
+	 */
+	public double distanceBetween(Object arg0)
+	{
+		if (arg0 instanceof UserItem)
+		{
+			return ((UserItem)arg0).getTransLocation().distanceBetween(this.getTransLocation());
+		}
+		else if (arg0 instanceof Entity)
+		{
+			return new TransLocation(((Entity)arg0)).distanceBetween(this.getTransLocation());
+		}
+		else if (arg0 instanceof TransLocation)
+		{
+			return ((TransLocation)arg0).distanceBetween(this.getTransLocation());
+		}
+		
+		return 0;
+	}
+	
+	/**
+	 * @return TransLocation of User
+	 */
+	public TransLocation getTransLocation()
+	{
+		return new TransLocation(this.player.getLocation());
+	}
 	
 	/**
 	 * Get HashSet of nearby Players within radius
