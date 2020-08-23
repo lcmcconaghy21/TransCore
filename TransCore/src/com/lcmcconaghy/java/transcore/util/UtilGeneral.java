@@ -54,7 +54,7 @@ public class UtilGeneral
 	 * @param coll StoreCollection of Generic Type T
 	 * @return new String List
 	 */
-	public static <T extends StoreItem<T>> List<String> list(StoreCollection<T> coll)
+	public static <T extends StoreItem<T>> List<String> listComponents(StoreCollection<T> coll)
 	{
 		List<String> ret = new ArrayList<String>();
 		
