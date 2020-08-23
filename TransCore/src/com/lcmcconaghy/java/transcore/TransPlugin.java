@@ -42,17 +42,37 @@ public abstract class TransPlugin extends JavaPlugin implements TPlugin
 	@Override
 	public void onEnable()
 	{
+		log(new Message("Loading "+this.name+" v"+this.version).titleize());
+		
 		log("<e>Registering <b>"+getAdapters().size()+" <e>Adapters...");
 		registerAdapters();
-		log("<e>");
+		log("<a>Adapters registered!");
 		
+		separate();
+		
+		log("<e>Loading <b>"+getStoreCollections().size()+" <e>Collections...");
 		registerCollections();
+		log("<a>Collections loaded!");
 		
+		separate();
+		
+		log("<e>Configuring plugin...");
 		registerConfig();
+		log("<a>Done!");
 		
+		separate();
+		
+		log("<e>Registering <b>"+getTransCommands().size()+" <e>Commands...");
 		registerCommands();
+		log("<a>Commands registered!");
 		
+		separate();
+		
+		log("<e>Loading engines...");
 		registerEngines();
+		log("<e>Listening to <b>"+getEngines().size()+" <e>Engines!");
+		
+		separate();
 		
 		this.startup();
 	}
@@ -153,7 +173,7 @@ public abstract class TransPlugin extends JavaPlugin implements TPlugin
 	// { LOGGER } //
 	
 	/**
-	 * Log Varargs in Console
+	 * Log messages in Console
 	 * @param msgs Varargs String[] messages
 	 */
 	public void log(String... msgs)
@@ -162,6 +182,28 @@ public abstract class TransPlugin extends JavaPlugin implements TPlugin
 		{
 			getConsoleLogger().sendMessage(Message.format(message));
 		}
+	}
+	
+	/**
+	 * Log messages in Console
+	 * @param msgs Varargs Message[] messages
+	 */
+	public void log(Message...msgs)
+	{
+		for (Message message : msgs)
+		{
+			String text = message.format().getText();
+			
+			log(text);
+		}
+	}
+	
+	/**
+	 * Separate different tasks from each other visually in the console
+	 */
+	public void separate()
+	{
+		log("<7>-------------------------------------------------");
 	}
 	
 	public ConsoleCommandSender getConsoleLogger()
