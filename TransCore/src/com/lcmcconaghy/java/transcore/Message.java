@@ -338,6 +338,30 @@ public class Message
 	}
 	
 	/**
+	 * Place text before current String text
+	 * @param arg0 String text to place before
+	 * @return this Message
+	 */
+	public Message insert(String arg0)
+	{
+		if (arg0 == null) return this;
+		
+		return this.setText(arg0+getText());
+	}
+	
+	/**
+	 * Add text after current String text
+	 * @param arg0 String text to append after
+	 * @return this Message
+	 */
+	public Message append(String arg0)
+	{
+		if (arg0 == null) return this;
+		
+		return this.setText(getText()+arg0);
+	}
+	
+	/**
 	 * Change the text of a Message
 	 * @param arg0 String new text
 	 * @return this Message
