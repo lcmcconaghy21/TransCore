@@ -148,6 +148,25 @@ public class Message
 		return this.component.getText();
 	}
 	
+	/**
+	 * @return String array representing words
+	 */
+	public String[] getWords()
+	{
+		String text = getText();
+		
+		if (text.contains(" "))
+		{
+			return text.split(" ");
+		}
+		
+		String[] ret = new String[1];
+		
+		ret[0] = text;
+		
+		return ret;
+	}
+	
 	// { BUILDERS } //
 	
 	/**
