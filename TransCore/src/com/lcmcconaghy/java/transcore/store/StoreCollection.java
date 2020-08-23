@@ -189,6 +189,8 @@ public class StoreCollection<T extends StoreItem> extends ArrayList<T> implement
 				e.printStackTrace();
 			}
 			
+			if (value==null) continue;
+			
 			json.set(defined.getName(), value);
 		}
 	}
