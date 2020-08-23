@@ -167,6 +167,15 @@ public class Message
 		return ret;
 	}
 	
+	/**
+	 * Add a String to the Message
+	 * @param arg0 String part
+	 */
+	public void add(String arg0)
+	{
+		this.component.setText(this.component.getText()+arg0+" ");
+	}
+	
 	// { BUILDERS } //
 	
 	/**
