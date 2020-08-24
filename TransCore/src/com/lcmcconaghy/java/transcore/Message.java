@@ -129,10 +129,10 @@ public class Message
 	 */
 	public Message(Message... messages)
 	{
-		if (messages.length>0) this.component = messages[0].component;
 		if (messages.length==0) this.component = new TextComponent();
+		if (messages.length>0) this.component = messages[0].component;
 		
-		if (messages.length<2) return;
+		if (messages.length==1) return;
 		
 		for (int i = 1; i<messages.length; i++)
 		{
@@ -381,27 +381,18 @@ public class Message
 	}
 	
 	/**
-	 * Replace a String with a Message
+	 * Replace a String with another String
 	 * @param arg0 String to be replaced
-	 * @param arg1 Message to be inserted in its place
+	 * @param arg1 String to be inserted in its place
 	 * @return new replaced Message
 	 */
-	public Message replace(String arg0, Message arg1)
+	public Message replace(String arg0, String arg1)
 	{
-		String text = getText();
+		if (!this.contains(arg0)) return this;
 		
-		String[] parts = text.split(arg0);
+		this.setText(getText().replaceAll(arg0, arg1));
 		
-		if (parts.length<=0)
-		{
-			return arg1;
-		}
-		if (parts.length==1)
-		{
-			return new Message(new Message(parts[0]), arg1);
-		}
-		
-		return new Message(new Message(parts[0]), arg1, this.setText(parts[1]));
+		return this;
 	}
 	
 	/**
