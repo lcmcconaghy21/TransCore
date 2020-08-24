@@ -5,6 +5,7 @@ import java.util.Set;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
@@ -21,12 +22,22 @@ public class UserItem extends StoreItem<UserItem>
 		return Bukkit.getPlayer(UUID.fromString(this.id));
 	}
 	
+	public OfflinePlayer getOfflinePlayer()
+	{
+		return Bukkit.getOfflinePlayer(UUID.fromString(this.id));
+	}
+	
 	/**
 	 * @return whether User is NPC
 	 */
 	public boolean isNpc()
 	{
 		return this.getPlayer().hasMetadata("NPC");
+	}
+	
+	public boolean isOnline()
+	{
+		return getOfflinePlayer().isOnline();
 	}
 	
 	// { LOCATION } //
