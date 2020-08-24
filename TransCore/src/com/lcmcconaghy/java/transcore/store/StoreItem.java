@@ -3,6 +3,7 @@ package com.lcmcconaghy.java.transcore.store;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.util.Objects;
 
 import com.lcmcconaghy.java.transcore.TransServer;
 import com.mongodb.BasicDBObject;
@@ -63,9 +64,7 @@ public class StoreItem<T extends StoreItem<T>>
 					e.printStackTrace();
 				}
 				
-				if (!TransServer.get().isSerializable(get)) continue;
-				
-				if (get == null) continue;
+				if (Objects.isNull(get)) continue;
 				
 				data.set(fields.getName(), get);
 			}

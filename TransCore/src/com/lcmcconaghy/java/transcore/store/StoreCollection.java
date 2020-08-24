@@ -131,6 +131,10 @@ public class StoreCollection<T extends StoreItem> extends ArrayList<T> implement
 		{
 			declared.setAccessible(true);
 			
+			Object get = json.get(declared.getName());
+			
+			if (get == null) continue;
+			
 			try
 			{
 				declared.set(ret, json.get(declared.getName()));
