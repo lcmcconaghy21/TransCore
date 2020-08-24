@@ -33,7 +33,7 @@ public class StoreItem<T extends StoreItem<T>>
 	{
 		if (getStore().getDatabaseType()==DatabaseType.FLATFILE)
 		{
-			File src = new File(store.getPath());
+			File src = new File(store.getPath()+File.separator+this.id+".json");
 			
 			if (!src.getParentFile().exists()) src.getParentFile().mkdirs();
 			if (!src.exists())

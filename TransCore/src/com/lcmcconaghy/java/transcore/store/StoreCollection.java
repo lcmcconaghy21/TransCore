@@ -1,7 +1,6 @@
 package com.lcmcconaghy.java.transcore.store;
 
 import java.io.File;
-import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.UUID;
@@ -123,7 +122,10 @@ public class StoreCollection<T extends StoreItem> extends ArrayList<T> implement
 		
 		Json json = new Json(src);
 		
-		ret.id = json.getFile().getName();
+		String name = json.getFile().getName();
+		if (name.contains(".json")) name = name.replaceAll(".json", "");
+		
+		ret.id = name;
 		
 		for (Field declared : ret.getClass().getDeclaredFields())
 		{
@@ -159,40 +161,7 @@ public class StoreCollection<T extends StoreItem> extends ArrayList<T> implement
 	 */
 	public void save(T arg0)
 	{
-		File src = new File(path+File.separator+arg0.id+".json");
-		
-		if (!src.exists())
-		{
-			try
-			{
-				src.createNewFile();
-			}
-			catch (IOException e)
-			{
-				e.printStackTrace();
-			}
-		}
-		
-		Json json = new Json(src);
-		
-		for (Field defined : arg0.getClass().getDeclaredFields())
-		{
-			defined.setAccessible(true);
-			
-			Object value = null;
-			try
-			{
-				value = defined.get(arg0);
-			}
-			catch (IllegalArgumentException | IllegalAccessException e)
-			{
-				e.printStackTrace();
-			}
-			
-			if (value==null) continue;
-			
-			json.set(defined.getName(), value);
-		}
+		arg0.update();
 	}
 	
 	public String getID()
@@ -225,7 +194,7 @@ public class StoreCollection<T extends StoreItem> extends ArrayList<T> implement
 	@Override
 	public void initialize(boolean arg0, TransPlugin arg1)
 	{
-		if (!arg0)
+		if (arg0 == false)
 		{
 			save();
 			return;

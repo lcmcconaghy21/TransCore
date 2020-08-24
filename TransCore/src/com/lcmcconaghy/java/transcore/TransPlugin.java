@@ -13,6 +13,7 @@ import com.lcmcconaghy.java.transcore.engine.Engine;
 import com.lcmcconaghy.java.transcore.store.Config;
 import com.lcmcconaghy.java.transcore.store.StoreCollection;
 import com.lcmcconaghy.java.transcore.store.serializable.Serializable;
+import com.lcmcconaghy.java.transcore.util.UtilGeneral;
 
 public abstract class TransPlugin extends JavaPlugin implements TPlugin
 {
@@ -25,7 +26,7 @@ public abstract class TransPlugin extends JavaPlugin implements TPlugin
 	
 	protected Config config;
 	
-	protected Map<Class<Init>, List<Init>> initialized = new HashMap<Class<Init>,List<Init>>();
+	protected Map<Class<? extends Init>, List<? extends Init>> initialized = new HashMap<Class<? extends Init>,List<? extends Init>>();
 	
 	// { CONSTRUCTOR } //
 	
@@ -85,7 +86,7 @@ public abstract class TransPlugin extends JavaPlugin implements TPlugin
 	{
 		super.onDisable();
 		
-		for (List<Init> inits : this.initialized.values())
+		for (List<? extends Init> inits : this.initialized.values())
 		{
 			for (Init init : inits)
 			{
@@ -109,6 +110,8 @@ public abstract class TransPlugin extends JavaPlugin implements TPlugin
 		{
 			arg.initialize(true, this);
 		}
+		
+		this.initialized.put(TransCommand.class, getTransCommands());
 	}
 	
 	/**
@@ -122,6 +125,8 @@ public abstract class TransPlugin extends JavaPlugin implements TPlugin
 		{
 			arg.initialize(true, this);
 		}
+		
+		this.initialized.put(Engine.class, getEngines());
 	}
 	
 	/**
@@ -132,6 +137,8 @@ public abstract class TransPlugin extends JavaPlugin implements TPlugin
 		if (getTransConfig() == null) return;
 		
 		getTransConfig().initialize(true, this);
+		
+		this.initialized.put(Config.class, UtilGeneral.list(getTransConfig()));
 	}
 	
 	/**
@@ -145,6 +152,8 @@ public abstract class TransPlugin extends JavaPlugin implements TPlugin
 		{
 			collection.initialize(true, this);
 		}
+		
+		this.initialized.put(StoreCollection.class, getStoreCollections());
 	}
 	
 	/**
@@ -158,6 +167,8 @@ public abstract class TransPlugin extends JavaPlugin implements TPlugin
 		{
 			serializable.initialize(true, this);
 		}
+		
+		this.initialized.put(Serializable.class, getAdapters());
 	}
 	
 	// { CONFIG } //
