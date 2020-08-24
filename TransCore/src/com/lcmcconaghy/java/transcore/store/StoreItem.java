@@ -65,6 +65,8 @@ public class StoreItem<T extends StoreItem<T>>
 				
 				if (!TransServer.get().isSerializable(get)) continue;
 				
+				if (get == null) continue;
+				
 				data.set(fields.getName(), get);
 			}
 			
