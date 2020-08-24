@@ -126,6 +126,7 @@ public class StoreCollection<T extends StoreItem> extends ArrayList<T> implement
 		if (name.contains(".json")) name = name.replaceAll(".json", "");
 		
 		ret.id = name;
+		ret.store = this;
 		
 		for (Field declared : ret.getClass().getDeclaredFields())
 		{
