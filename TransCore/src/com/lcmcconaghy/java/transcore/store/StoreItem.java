@@ -32,7 +32,7 @@ public class StoreItem<T extends StoreItem<T>>
 	 */
 	public void update()
 	{
-		if (getStore().getDatabaseType()==DatabaseType.FLATFILE)
+		if (getStore().getDatabaseType() == null || getStore().getDatabaseType()==DatabaseType.FLATFILE)
 		{
 			File src = new File(store.getPath()+File.separator+this.id+".json");
 			
