@@ -40,6 +40,18 @@ public class UserItem extends StoreItem<UserItem>
 		return getOfflinePlayer().isOnline();
 	}
 	
+	// { COMPARATOR } //
+	
+	/**
+	 * Check if two UserItems are the same
+	 * @param arg0
+	 * @return
+	 */
+	public boolean equals(UserItem arg0)
+	{
+		return this.id.equals(arg0.id);
+	}
+	
 	// { LOCATION } //
 	
 	/**
