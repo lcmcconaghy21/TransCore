@@ -392,6 +392,15 @@ public class Message
 		
 		String[] parts = text.split(arg0);
 		
+		if (parts.length<=0)
+		{
+			return arg1;
+		}
+		if (parts.length==1)
+		{
+			return new Message(new Message(parts[0]), arg1);
+		}
+		
 		return new Message(new Message(parts[0]), arg1, this.setText(parts[1]));
 	}
 	
