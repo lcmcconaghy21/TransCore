@@ -24,7 +24,11 @@ public class EnginePlayer extends Engine
 	{
 		for (UserCollection<?> collection : TransServer.get().getUserCollections())
 		{
-			if (collection.has(event.getPlayer())) continue;
+			if (collection.has(event.getPlayer()))
+			{
+				collection.get(event.getPlayer());
+				continue;
+			}
 			
 			collection.create(event.getPlayer());
 		}

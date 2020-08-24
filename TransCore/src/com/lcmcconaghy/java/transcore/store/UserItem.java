@@ -2,7 +2,9 @@ package com.lcmcconaghy.java.transcore.store;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
@@ -11,15 +13,12 @@ import com.lcmcconaghy.java.transcore.TransLocation;
 
 public class UserItem extends StoreItem<UserItem>
 {
-	// { FIELDS } //
-	
-	protected Player player;
 	
 	// { PLAYER } //
 	
 	public Player getPlayer()
 	{
-		return this.player;
+		return Bukkit.getPlayer(UUID.fromString(this.id));
 	}
 	
 	/**
@@ -60,7 +59,7 @@ public class UserItem extends StoreItem<UserItem>
 	 */
 	public TransLocation getTransLocation()
 	{
-		return new TransLocation(this.player.getLocation());
+		return new TransLocation(getPlayer().getLocation());
 	}
 	
 	/**
@@ -70,11 +69,11 @@ public class UserItem extends StoreItem<UserItem>
 	 */
 	public Set<Player> getNearbyPlayers(double arg0)
 	{
-		if (!this.player.isOnline()) return null;
+		if (!getPlayer().isOnline()) return null;
 		
 		Set<Player> nearbyPlayers = new HashSet<Player>();
 		
-		for (Entity part : player.getNearbyEntities(arg0, arg0, arg0))
+		for (Entity part : getPlayer().getNearbyEntities(arg0, arg0, arg0))
 		{
 			if (!(part instanceof Player)) continue;
 			
