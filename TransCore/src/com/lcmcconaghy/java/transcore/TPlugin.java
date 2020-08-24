@@ -2,6 +2,8 @@ package com.lcmcconaghy.java.transcore;
 
 import java.util.List;
 
+import org.jetbrains.annotations.NotNull;
+
 import com.lcmcconaghy.java.transcore.command.TransCommand;
 import com.lcmcconaghy.java.transcore.engine.Engine;
 import com.lcmcconaghy.java.transcore.store.Config;
@@ -25,13 +27,13 @@ public interface TPlugin
 	 * Place all serializables in here
 	 * @return List of all Serializables
 	 */
-	public List<Serializable<?>> getAdapters();
+	public @NotNull List<Serializable<?>> getAdapters();
 	
 	/**
 	 * Place all StoreCollections in here
 	 * @return List of all StoreCollections
 	 */
-	public List<StoreCollection<?>> getStoreCollections();
+	public @NotNull List<StoreCollection<?>> getStoreCollections();
 	
 	/**
 	 * @return one instance of Config
@@ -42,12 +44,12 @@ public interface TPlugin
 	 * Place all core TransCommands here
 	 * @return List of all TransCommands
 	 */
-	public List<TransCommand> getTransCommands();
+	public @NotNull List<TransCommand> getTransCommands();
 	
 	/**
 	 * Place all Engines here
 	 * @return List of all Engines
 	 */
-	public List<Engine> getEngines();
+	public @NotNull List<Engine> getEngines();
 	
 }
