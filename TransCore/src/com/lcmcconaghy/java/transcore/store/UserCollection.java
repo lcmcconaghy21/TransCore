@@ -2,6 +2,7 @@ package com.lcmcconaghy.java.transcore.store;
 
 import java.util.UUID;
 
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class UserCollection<T extends UserItem> extends StoreCollection<T>
@@ -76,6 +77,14 @@ public class UserCollection<T extends UserItem> extends StoreCollection<T>
 		else if (arg0 instanceof Player)
 		{
 			id = ((Player)arg0).getUniqueId().toString();
+		}
+		else if (arg0 instanceof CommandSender)
+		{
+			CommandSender sender = (CommandSender) arg0;
+			
+			if (!(sender instanceof Player)) return null;
+			
+			id = ((Player)sender).getUniqueId().toString();
 		}
 		
 		for (T user : this)

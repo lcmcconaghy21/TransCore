@@ -76,7 +76,7 @@ public abstract class PagerAbstract<T> implements Pager<T>
 	 * @param arg0 Integer page name
 	 * @return
 	 */
-	public void sendPage(int arg0, TransCommand arg1, CommandSender sender)
+	public void sendPage(int arg0, TransCommand arg1, CommandSender arg2)
 	{
 		final Message title = UtilGeneral.titleize(this.name);
 		
@@ -87,13 +87,13 @@ public abstract class PagerAbstract<T> implements Pager<T>
 		if (arg0>=this.lines.size() || arg0<0)
 		{
 			new Message("There are only <b>"+this.lines.size()+" <c>pages in this category!").error()
-			           .send(sender);
+			           .send(arg2);
 			return;
 		}
 		
 		for (T ts : this.lines.get(arg0))
 		{
-			contents.add(sendLine(ts));
+			contents.add(sendLine(ts, arg2));
 		}
 		
 		int nextPage = arg0+1;
@@ -117,14 +117,14 @@ public abstract class PagerAbstract<T> implements Pager<T>
 			@Override
 			public void run()
 			{
-				title.send(sender);
+				title.send(arg2);
 				
 				for (Message content : contents)
 				{
-					content.send(sender);
+					content.send(arg2);
 				}
 				
-				bottom.send(sender);
+				bottom.send(arg2);
 			}
 		});
 	}

@@ -1,5 +1,7 @@
 package com.lcmcconaghy.java.transcore.pager;
 
+import org.bukkit.command.CommandSender;
+
 import com.lcmcconaghy.java.transcore.Message;
 import com.lcmcconaghy.java.transcore.command.TransCommand;
 
@@ -17,7 +19,7 @@ public class PagerHelpCommand extends PagerAbstract<TransCommand>
 	
 	// { LINES } //
 	
-	public Message sendLine(TransCommand arg0)
+	public Message sendLine(TransCommand arg0, CommandSender arg1)
 	{
 		return new Message(new Message("/"+arg0.getFullCommand()).color(ChatColor.AQUA),
 				           new Message(arg0.getUsage()).color(ChatColor.BLUE),
