@@ -15,6 +15,7 @@ public class IUser extends UserItem
 	
 	// { FIELDS } //
 	
+	private Profile activeProfile;
 	private Map<String,Profile> profiles = new HashMap<String,Profile>();
 	
 	// { SETTERS } //
@@ -47,11 +48,21 @@ public class IUser extends UserItem
 		return this.profiles.containsKey(arg0.getName());
 	}
 	
+	public void setActiveProfile(Profile arg0)
+	{
+		this.activeProfile = arg0;
+	}
+	
 	// { GETTERS } //
 	
 	public Collection<Profile> getProfiles()
 	{
 		return this.profiles.values();
+	}
+	
+	public Profile getActiveProfile()
+	{
+		return this.activeProfile;
 	}
 	
 }
