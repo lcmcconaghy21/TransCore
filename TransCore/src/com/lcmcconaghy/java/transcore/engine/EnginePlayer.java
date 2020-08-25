@@ -22,6 +22,8 @@ public class EnginePlayer extends Engine
 	@EventHandler(priority=EventPriority.HIGHEST)
 	public void registerPlayer(PlayerJoinEvent event)
 	{
+		TransServer.get().registerNametag(event.getPlayer());
+		
 		for (UserCollection<?> collection : TransServer.get().getUserCollections())
 		{
 			if (collection.has(event.getPlayer()))
