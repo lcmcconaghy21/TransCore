@@ -12,8 +12,10 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.Server;
 import org.bukkit.command.Command;
 import org.bukkit.command.SimpleCommandMap;
+import org.bukkit.inventory.InventoryView;
 
 import com.lcmcconaghy.java.transcore.command.TransCommand;
+import com.lcmcconaghy.java.transcore.gui.ChestGui;
 import com.lcmcconaghy.java.transcore.store.StoreCollection;
 import com.lcmcconaghy.java.transcore.store.UserCollection;
 import com.lcmcconaghy.java.transcore.store.transcore.TransConfig;
@@ -31,6 +33,7 @@ public class TransServer
 	private Map<UUID,Nametag> nametags = new HashMap<UUID,Nametag>();
 	
 	private List<StoreCollection<?>> collections = new ArrayList<StoreCollection<?>>();
+	private Map<String,ChestGui> guis = new HashMap<String,ChestGui>();
 	
 	private MongoClient mongoClient;
 	
@@ -119,6 +122,52 @@ public class TransServer
 	public boolean hasCommand(String arg0)
 	{
 		return this.commandMap.getCommand(arg0)!=null;
+	}
+	
+	// { INTERFACES } //
+	
+	/**
+	 * Register a new GUI
+	 * @param arg0 ChestGui to be registered
+	 */
+	public void registerGui(ChestGui arg0)
+	{
+		if ( containsGui(arg0) ) return;
+		
+		this.guis.put(arg0.getID(), arg0);
+	}
+	
+	/**
+	 * @param arg0 InventoryView
+	 * @return whether Inventory is a GUI
+	 */
+	public boolean isGui(InventoryView arg0)
+	{
+		return this.guis.containsKey(arg0.getTitle());
+	}
+	
+	/**
+	 * Check if GUI is registered
+	 * @param arg0 ChestGui which is to be checked for
+	 * @return whether the GUI is registered
+	 */
+	public boolean containsGui(ChestGui arg0)
+	{
+		return this.guis.containsKey(arg0.getID());
+	}
+	
+	/**
+	 * @param arg0 InventoryView
+	 * @return GUI matching the InventoryView
+	 */
+	public ChestGui getGui(InventoryView arg0)
+	{
+		if ( !isGui(arg0) )
+		{
+			return null;
+		}
+		
+		return this.guis.get( arg0.getTitle() );
 	}
 	
 	// { DATABASE } //
