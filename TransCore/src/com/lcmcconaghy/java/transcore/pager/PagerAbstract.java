@@ -93,7 +93,11 @@ public abstract class PagerAbstract<T> implements Pager<T>
 		
 		for (T ts : this.lines.get(arg0))
 		{
-			contents.add(sendLine(ts, arg2));
+			Message line = sendLine(ts, arg2);
+			
+			if (line == null) continue;
+			
+			contents.add(line);
 		}
 		
 		int nextPage = arg0+1;
