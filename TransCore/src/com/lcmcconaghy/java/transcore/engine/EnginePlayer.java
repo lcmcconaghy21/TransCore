@@ -7,7 +7,6 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 
 import com.lcmcconaghy.java.transcore.TransServer;
-import com.lcmcconaghy.java.transcore.command.TransCommand;
 import com.lcmcconaghy.java.transcore.gui.ChestGui;
 import com.lcmcconaghy.java.transcore.store.UserCollection;
 
@@ -48,10 +47,8 @@ public class EnginePlayer extends Engine
 		ChestGui gui = TransServer.get().getGui( event.getView() );
 		ItemStack selection = event.getCurrentItem();
 		
-		TransCommand executable = gui.getExecutable(selection);
+		Runnable execution = gui.getExecutable(selection);
 		
-		if (executable == null) return;
-		
-		executable.executeOuter(event.getWhoClicked(), executable.args);
+		execution.run();
 	}
 }

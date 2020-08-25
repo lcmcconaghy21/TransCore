@@ -12,7 +12,6 @@ import org.bukkit.inventory.ItemStack;
 import com.lcmcconaghy.java.transcore.Init;
 import com.lcmcconaghy.java.transcore.TransPlugin;
 import com.lcmcconaghy.java.transcore.TransServer;
-import com.lcmcconaghy.java.transcore.command.TransCommand;
 import com.lcmcconaghy.java.transcore.util.UtilGeneral;
 
 public class ChestGui implements Init
@@ -22,7 +21,7 @@ public class ChestGui implements Init
 	
 	private String id;
 	
-	private Map<Integer, Map<ItemStack,TransCommand>> options = new HashMap<Integer,Map<ItemStack,TransCommand>>();
+	private Map<Integer, Map<ItemStack,Runnable>> options = new HashMap<Integer,Map<ItemStack,Runnable>>();
 	
 	// { CONSTRUCTOR } //
 	
@@ -40,19 +39,17 @@ public class ChestGui implements Init
 	
 	// { OPTIONS } //
 	
-	public void addOption(ItemStack arg0, TransCommand arg1, String[] args)
+	public void addOption(ItemStack arg0, Runnable arg1)
 	{
-		addOption( getNextSpace() , arg0, arg1, args);
+		addOption( getNextSpace() , arg0, arg1);
 	}
 	
-	public void addOption(int arg0, ItemStack arg1, TransCommand arg2, String[] args)
+	public void addOption(int arg0, ItemStack arg1, Runnable arg2)
 	{
 		if ( isOption(arg1) )
 		{
 			this.options.remove(arg0);
 		}
-		
-		arg2.args = args;
 		
 		this.options.put(arg0, UtilGeneral.map(arg1, arg2));
 	}
@@ -115,16 +112,16 @@ public class ChestGui implements Init
 	
 	public ItemStack getStack(int arg0)
 	{
-		Map<ItemStack,TransCommand> map = this.options.get(arg0);
+		Map<ItemStack,Runnable> map = this.options.get(arg0);
 		
 		ItemStack[] internal = map.keySet().toArray(new ItemStack[1]);
 		
 		return internal[0];
 	}
 	
-	public TransCommand getExecutable(ItemStack arg0)
+	public Runnable getExecutable(ItemStack arg0)
 	{
-		TransCommand ret = null;
+		Runnable ret = null;
 		
 		for (int i : this.options.keySet())
 		{

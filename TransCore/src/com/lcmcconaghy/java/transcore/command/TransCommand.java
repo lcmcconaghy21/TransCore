@@ -26,7 +26,7 @@ public class TransCommand implements Init
 	// { FIELDS } //
 	
 	protected CommandSender sender;
-	public String[] args;
+	private String[] args;
 	private int tracer = -1;
 	private boolean hidden = false;
 	
