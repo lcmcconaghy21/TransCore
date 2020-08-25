@@ -11,6 +11,8 @@ import org.bukkit.entity.Player;
 
 import com.lcmcconaghy.java.transcore.Message;
 import com.lcmcconaghy.java.transcore.TransLocation;
+import com.lcmcconaghy.java.transcore.TransServer;
+import com.lcmcconaghy.java.transcore.tag.Nametag;
 
 public class UserItem extends StoreItem<UserItem>
 {
@@ -30,6 +32,11 @@ public class UserItem extends StoreItem<UserItem>
 	public String getName()
 	{
 		return getOfflinePlayer().getName();
+	}
+	
+	public Nametag getNametag()
+	{
+		return TransServer.get().getNametagOf( getOfflinePlayer() );
 	}
 	
 	/**

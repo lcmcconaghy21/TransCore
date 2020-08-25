@@ -2,10 +2,13 @@ package com.lcmcconaghy.java.transcore;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.Server;
 import org.bukkit.command.Command;
 import org.bukkit.command.SimpleCommandMap;
@@ -14,6 +17,7 @@ import com.lcmcconaghy.java.transcore.command.TransCommand;
 import com.lcmcconaghy.java.transcore.store.StoreCollection;
 import com.lcmcconaghy.java.transcore.store.UserCollection;
 import com.lcmcconaghy.java.transcore.store.transcore.TransConfig;
+import com.lcmcconaghy.java.transcore.tag.Nametag;
 import com.mongodb.DB;
 import com.mongodb.MongoClient;
 
@@ -24,6 +28,7 @@ public class TransServer
 	
 	private Server server;
 	private SimpleCommandMap commandMap;
+	private Map<UUID,Nametag> nametags = new HashMap<UUID,Nametag>();
 	
 	private List<StoreCollection<?>> collections = new ArrayList<StoreCollection<?>>();
 	
@@ -84,6 +89,16 @@ public class TransServer
 	public SimpleCommandMap getCommandMap()
 	{
 		return this.commandMap;
+	}
+	
+	public void registerNametag(OfflinePlayer arg0)
+	{
+		this.nametags.put(arg0.getUniqueId(), new Nametag(arg0));
+	}
+	
+	public Nametag getNametagOf(OfflinePlayer arg0)
+	{
+		return this.nametags.get(arg0.getUniqueId());
 	}
 	
 	public boolean hasCommand(TransCommand arg0)
