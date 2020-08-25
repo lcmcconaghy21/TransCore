@@ -12,7 +12,9 @@ import com.lcmcconaghy.java.transcore.store.StoreCollection;
 import com.lcmcconaghy.java.transcore.store.serializable.Serializable;
 import com.lcmcconaghy.java.transcore.store.serializable.SerializableNametag;
 import com.lcmcconaghy.java.transcore.store.serializable.SerializablePlayer;
+import com.lcmcconaghy.java.transcore.store.serializable.SerializableProfile;
 import com.lcmcconaghy.java.transcore.store.transcore.IUserCollection;
+import com.lcmcconaghy.java.transcore.store.transcore.ProfileCollection;
 import com.lcmcconaghy.java.transcore.util.UtilGeneral;
 
 public class TransCore extends TransPlugin
@@ -49,14 +51,16 @@ public class TransCore extends TransPlugin
 	@Override
 	public List<Serializable<?>> getAdapters()
 	{
-		return UtilGeneral.list(SerializablePlayer.get(),
+		return UtilGeneral.list(SerializableProfile.get(),
+				                SerializablePlayer.get(),
 				                SerializableNametag.get());
 	}
 
 	@Override
 	public List<StoreCollection<?>> getStoreCollections()
 	{
-		return UtilGeneral.list(IUserCollection.get());
+		return UtilGeneral.list(ProfileCollection.get(),
+				                IUserCollection.get());
 	}
 
 	@Override
