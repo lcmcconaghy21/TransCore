@@ -28,6 +28,7 @@ public class TransCommand implements Init
 	protected CommandSender sender;
 	protected String[] args;
 	private int tracer = -1;
+	private boolean hidden = false;
 	
 	protected List<String> aliases = new ArrayList<String>();
 	protected String desc;
@@ -249,6 +250,25 @@ public class TransCommand implements Init
 	public String getPermissionNode()
 	{
 		return this.permission;
+	}
+	
+	// { HIDE } //
+	
+	/**
+	 * Toggle hidden command feature
+	 * @param arg0 Boolean whether TransCommand is hidden
+	 */
+	public void setHidden(boolean arg0)
+	{
+		this.hidden = arg0;
+	}
+	
+	/**
+	 * @return whether TransCommand is hidden
+	 */
+	public boolean isHidden()
+	{
+		return this.hidden;
 	}
 	
 	// { ARGS } //

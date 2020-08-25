@@ -21,6 +21,11 @@ public class PagerHelpCommand extends PagerAbstract<TransCommand>
 	
 	public Message sendLine(TransCommand arg0, CommandSender arg1)
 	{
+		if (arg0.isHidden())
+		{
+			return null;
+		}
+		
 		return new Message(new Message("/"+arg0.getFullCommand()).color(ChatColor.AQUA),
 				           new Message(arg0.getUsage()).color(ChatColor.BLUE),
 				           new Message(": "+arg0.getDesc()).color(ChatColor.YELLOW));
