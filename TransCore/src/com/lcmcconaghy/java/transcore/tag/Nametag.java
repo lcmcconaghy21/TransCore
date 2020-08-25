@@ -4,7 +4,7 @@ import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
-import org.bukkit.scoreboard.ScoreboardManager;
+import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
 
 import com.lcmcconaghy.java.transcore.exception.NametagException;
@@ -14,7 +14,7 @@ public class Nametag
 {
 	// { STATIC } //
 	
-	ScoreboardManager scoreboards = Bukkit.getScoreboardManager();
+	private static Scoreboard scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
 	
 	// { FIELDS } //
 	
@@ -30,7 +30,7 @@ public class Nametag
 		this.playerId = arg0.getUniqueId();
 		this.teamId = playerId.toString().substring(0, 15);
 		
-		Team personalTeam = scoreboards.getMainScoreboard().getTeam(teamId);
+		Team personalTeam = scoreboard.getTeam(teamId);
 		
 		if (personalTeam != null)
 		{
@@ -40,7 +40,7 @@ public class Nametag
 			return;
 		}
 		
-		scoreboards.getMainScoreboard().registerNewTeam(teamId).addEntry(getPlayer().getName());
+		scoreboard.registerNewTeam(teamId).addEntry(getPlayer().getName());
 	}
 	
 	// { SETTERS } //
@@ -97,6 +97,6 @@ public class Nametag
 	
 	public Team getHandler()
 	{
-		return scoreboards.getMainScoreboard().getTeam(this.teamId);
+		return scoreboard.getTeam(this.teamId);
 	}
 }
