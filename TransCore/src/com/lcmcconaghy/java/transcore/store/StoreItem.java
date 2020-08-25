@@ -28,6 +28,14 @@ public class StoreItem<T extends StoreItem<T>>
 	// { STORE } //
 	
 	/**
+	 * Delete this entry
+	 */
+	public void drop()
+	{
+		this.store.remove(this);
+	}
+	
+	/**
 	 * Alert database that this instance has updated
 	 */
 	public void update()
