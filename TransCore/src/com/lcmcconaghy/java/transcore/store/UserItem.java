@@ -27,6 +27,11 @@ public class UserItem extends StoreItem<UserItem>
 		return Bukkit.getOfflinePlayer(UUID.fromString(this.id));
 	}
 	
+	public String getName()
+	{
+		return getOfflinePlayer().getName();
+	}
+	
 	/**
 	 * @return whether User is NPC
 	 */
