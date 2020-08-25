@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.lcmcconaghy.java.transcore.cmd.CmdTransCore;
 import com.lcmcconaghy.java.transcore.command.TransCommand;
+import com.lcmcconaghy.java.transcore.economy.TransEco;
 import com.lcmcconaghy.java.transcore.engine.Engine;
 import com.lcmcconaghy.java.transcore.engine.EnginePlayer;
 import com.lcmcconaghy.java.transcore.engine.EngineServer;
@@ -37,7 +38,18 @@ public class TransCore extends TransPlugin
 	@Override
 	public void startup()
 	{
+		log("Attempting to hook <d>Vault<e>...");
 		
+		TransEco.get().initialize(true, this);
+		boolean result = TransEco.get().isInitialized();
+		
+		if (!result)
+		{
+			log("<d>Vault <c>not installed! Will not hook into <d>Vault<e>.");
+			return;
+		}
+		
+		log("Hooked into <d>Vault<e>!");
 	}
 	
 	// { DISABLE } //
