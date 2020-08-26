@@ -334,6 +334,18 @@ public class TransCommand implements Init
 		
 		Argument<T> arg = (Argument<T>) getNextArgument();
 		
+		if (arg.willConcat(this))
+		{
+			String complete = "";
+			
+			for (int i = tracer; i<this.args.length; i++)
+			{
+				complete += args[i];
+			}
+			
+			return arg.read(complete, sender);
+		}
+		
 		return arg.read(args[tracer], sender);
 	}
 	
