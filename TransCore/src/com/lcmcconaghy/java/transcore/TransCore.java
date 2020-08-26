@@ -2,6 +2,8 @@ package com.lcmcconaghy.java.transcore;
 
 import java.util.List;
 
+import org.bukkit.Bukkit;
+
 import com.lcmcconaghy.java.transcore.cmd.CmdTransCore;
 import com.lcmcconaghy.java.transcore.command.TransCommand;
 import com.lcmcconaghy.java.transcore.economy.TransEco;
@@ -40,18 +42,14 @@ public class TransCore extends TransPlugin
 	@Override
 	public void startup()
 	{
-		log("Attempting to hook <d>Vault<e>...");
-		
-		TransEco.get().initialize(true, this);
-		boolean result = TransEco.get().isInitialized();
-		
-		if (!result)
+		Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable()
 		{
-			log("<d>Vault <c>not installed! Will not hook into <d>Vault<e>.");
-			return;
-		}
-		
-		log("Hooked into <d>Vault<e>!");
+			@Override
+			public void run()
+			{
+				alertVault();
+			}
+		}, 15L);
 	}
 	
 	// { DISABLE } //
@@ -105,6 +103,20 @@ public class TransCore extends TransPlugin
 		return TransConfig.get();
 	}
 	
-	
+	public void alertVault()
+	{
+		log("Attempting to hook <d>Vault<e>...");
+		
+		TransEco.get().initialize(true, this);
+		boolean result = TransEco.get().isInitialized();
+		
+		if (!result)
+		{
+			log("<d>Vault <c>not installed! Will not hook into <d>Vault<e>.");
+			return;
+		}
+		
+		log("Hooked into <d>Vault<e>!");
+	}
 	
 }
