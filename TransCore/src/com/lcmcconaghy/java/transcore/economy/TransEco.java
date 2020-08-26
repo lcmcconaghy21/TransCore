@@ -5,6 +5,7 @@ import org.bukkit.plugin.Plugin;
 
 import com.lcmcconaghy.java.transcore.Init;
 import com.lcmcconaghy.java.transcore.TransPlugin;
+import com.lcmcconaghy.java.transcore.store.transcore.Profile;
 
 public class TransEco implements Init
 {
@@ -43,4 +44,31 @@ public class TransEco implements Init
 				     .getProvider();
 	}
 	
+	// { ECON } //
+	
+	/**
+	 * 
+	 * @param arg0 Profile from
+	 * @param arg1 Profile to
+	 * @param arg2 Double amount to transfer
+	 * @return
+	 */
+	@SuppressWarnings("deprecation")
+	public boolean move(Profile arg0, Profile arg1, double arg2, Plugin arg3)
+	{
+		MoneyTransferEvent transferEvent = new MoneyTransferEvent(arg0, arg1, arg2, arg3);
+		transferEvent.run();
+		
+		if ( transferEvent.isCancelled() ) return false;
+		
+		arg2 = transferEvent.getAmount();
+		
+		net.milkbowl.vault.economy.EconomyResponse response = getEconomy().withdrawPlayer(arg0.getID(), arg2);
+		
+		if ( !response.transactionSuccess() ) return false;
+		
+		getEconomy().depositPlayer(arg1.getID(), arg2);
+		
+		return true;
+	}
 }
