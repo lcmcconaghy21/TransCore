@@ -171,18 +171,6 @@ public abstract class TransPlugin extends JavaPlugin implements TPlugin
 		this.initialized.put(Serializable.class, getAdapters());
 	}
 	
-	// { CONFIG } //
-	
-	public void setTransConfig(Config arg0)
-	{
-		this.config = arg0;
-	}
-	
-	public Config getTransConfig()
-	{
-		return this.config;
-	}
-	
 	// { LOGGER } //
 	
 	/**

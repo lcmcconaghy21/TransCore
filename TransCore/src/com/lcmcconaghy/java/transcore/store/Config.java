@@ -30,8 +30,6 @@ public class Config implements Init
 		this.yaml = new Yaml(src);
 		
 		if (!(arg0 instanceof TransPlugin)) return;
-		
-		((TransPlugin)arg0).setTransConfig(this);
 	}
 	
 	// { INIT } //

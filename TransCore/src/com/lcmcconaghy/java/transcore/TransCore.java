@@ -9,6 +9,7 @@ import com.lcmcconaghy.java.transcore.engine.Engine;
 import com.lcmcconaghy.java.transcore.engine.EnginePlayer;
 import com.lcmcconaghy.java.transcore.engine.EngineServer;
 import com.lcmcconaghy.java.transcore.exception.TransCommandException;
+import com.lcmcconaghy.java.transcore.store.Config;
 import com.lcmcconaghy.java.transcore.store.StoreCollection;
 import com.lcmcconaghy.java.transcore.store.serializable.Serializable;
 import com.lcmcconaghy.java.transcore.store.serializable.SerializableNametag;
@@ -16,6 +17,7 @@ import com.lcmcconaghy.java.transcore.store.serializable.SerializablePlayer;
 import com.lcmcconaghy.java.transcore.store.serializable.SerializableProfile;
 import com.lcmcconaghy.java.transcore.store.transcore.IUserCollection;
 import com.lcmcconaghy.java.transcore.store.transcore.ProfileCollection;
+import com.lcmcconaghy.java.transcore.store.transcore.TransConfig;
 import com.lcmcconaghy.java.transcore.util.UtilGeneral;
 
 public class TransCore extends TransPlugin
@@ -95,6 +97,12 @@ public class TransCore extends TransPlugin
 	{
 		return UtilGeneral.list(EnginePlayer.get(),
 				                EngineServer.get());
+	}
+
+	@Override
+	public Config getTransConfig()
+	{
+		return TransConfig.get();
 	}
 	
 	
