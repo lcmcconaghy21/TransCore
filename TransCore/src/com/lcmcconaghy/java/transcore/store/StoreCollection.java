@@ -100,6 +100,17 @@ public class StoreCollection<T extends StoreItem> extends ArrayList<T> implement
 		return ret;
 	}
 	
+	/**
+	 * @param arg0 String id
+	 * @return whether an object with the ID exists
+	 */
+	public boolean has(String arg0)
+	{
+		if ( get(arg0) == null ) return false;
+		
+		return true;
+	}
+	
 	// { DATABASE } //
 	
 	/**
