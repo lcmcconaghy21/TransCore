@@ -7,6 +7,7 @@ public enum TransPerm implements PermissionBase
 	
 	PROFILE_CREATE,
 	PROFILE_REMOVE,
+	PROFILE_SELECT,
 	
 	RELOAD,
 	

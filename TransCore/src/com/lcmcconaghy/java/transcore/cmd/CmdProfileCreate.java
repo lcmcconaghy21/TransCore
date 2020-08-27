@@ -32,6 +32,8 @@ public class CmdProfileCreate extends TransCommand
 		Profile profile = ProfileCollection.get().create(name);
 		profile.setOwner( IUser.get(sender) );
 		
+		IUser.get( sender ).setActiveProfile(profile);
+		
 		message("You have created the profile <d>"+name+"<e>.");
 	}
 	
