@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.bukkit.Bukkit;
 
-import com.lcmcconaghy.java.transcore.cmd.CmdTransCore;
+import com.lcmcconaghy.java.transcore.cmd.CmdProfile;
 import com.lcmcconaghy.java.transcore.command.TransCommand;
 import com.lcmcconaghy.java.transcore.economy.TransEco;
 import com.lcmcconaghy.java.transcore.engine.Engine;
@@ -80,7 +80,7 @@ public class TransCore extends TransPlugin
 	{
 		try
 		{
-			return UtilGeneral.list(new CmdTransCore());
+			return UtilGeneral.list(new CmdProfile());
 		}
 		catch (TransCommandException e)
 		{

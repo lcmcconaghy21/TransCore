@@ -5,10 +5,8 @@ import com.lcmcconaghy.java.transcore.util.UtilPerms;
 public enum TransPerm implements PermissionBase
 {
 	
-	UPDATE_MAJOR,
-	UPDATE_MINOR,
-	UPDATE_BUILD,
-	UPDATE_REVISION,
+	PROFILE_CREATE,
+	PROFILE_REMOVE,
 	
 	RELOAD,
 	
