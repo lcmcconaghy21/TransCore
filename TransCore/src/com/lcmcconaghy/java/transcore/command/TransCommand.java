@@ -77,7 +77,10 @@ public class TransCommand implements Init
 			
 			if (args.length==0)
 			{
-				this.getHelpCommand().executeOuter(sender, new String[0]);
+				String[] helpArgs = new String[1];
+				helpArgs[0] = "1";
+				
+				this.getHelpCommand().executeOuter(sender, helpArgs);
 				return;
 			}
 			
