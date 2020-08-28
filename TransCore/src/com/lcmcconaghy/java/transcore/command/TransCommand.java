@@ -492,13 +492,18 @@ public class TransCommand implements Init
 		return this.parent;
 	}
 	
-	public String getFullCommand()
+	public String getFullCommand() throws TransCommandException
 	{
 		TransCommand intParent = this.parent;
 		String ret = this.getLabel();
 		
 		while (intParent!=null)
 		{
+			if (intParent.aliases.size() <= 0)
+			{
+				throw new TransCommandException("No aliases registered for command "+this.getClass().getName());
+			}
+			
 			ret = intParent.aliases.get(0)+" "+ret;
 			
 			intParent = intParent.parent;

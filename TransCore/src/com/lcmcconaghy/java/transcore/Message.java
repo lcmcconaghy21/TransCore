@@ -7,6 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import com.lcmcconaghy.java.transcore.command.TransCommand;
+import com.lcmcconaghy.java.transcore.exception.TransCommandException;
 import com.lcmcconaghy.java.transcore.store.UserItem;
 import com.lcmcconaghy.java.transcore.util.UtilGeneral;
 import com.lcmcconaghy.java.transcore.util.UtilMaths;
@@ -212,7 +213,18 @@ public class Message
 	 */
 	public Message command(TransCommand arg0, String... args)
 	{
-		this.component.setClickEvent(new ClickEvent(Action.RUN_COMMAND, arg0.getFullCommand()+" "+
+		String fullCommand = "";
+		
+		try
+		{
+			fullCommand = arg0.getFullCommand();
+		}
+		catch (TransCommandException e)
+		{
+			e.printStackTrace();
+		}
+		
+		this.component.setClickEvent(new ClickEvent(Action.RUN_COMMAND, fullCommand+" "+
 				                     UtilGeneral.listify(" ", args)));
 		
 		return this;
