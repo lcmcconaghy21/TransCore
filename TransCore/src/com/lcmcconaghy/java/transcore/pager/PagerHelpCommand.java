@@ -13,9 +13,9 @@ public class PagerHelpCommand extends PagerAbstract<TransCommand>
 	
 	// CONSTRUCTOR //
 	
-	public PagerHelpCommand(TransCommand command)
+	public PagerHelpCommand(TransCommand command, CommandSender sender)
 	{
-		super(command.getLabel()+" Help", command.getSubCommands());
+		super(command.getLabel()+" Help", command.getVisibleSubCommands(sender));
 	}
 	
 	// { LINES } //
