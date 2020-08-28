@@ -29,8 +29,8 @@ public class TransCommand implements Init
 	private String[] args;
 	private int tracer = -1;
 	private boolean hidden = false;
+	private List<String> aliases = new ArrayList<String>();
 	
-	protected List<String> aliases = new ArrayList<String>();
 	protected String desc;
 	protected String permission;
 	protected Map<Argument<?>,Boolean> arguments = new HashMap<Argument<?>,Boolean>();
@@ -391,6 +391,21 @@ public class TransCommand implements Init
 		return this.subCommands;
 	}
 	
+	// { ALIASES } //
+	
+	public void addAliases(String...args)
+	{
+		for (String arg : args)
+		{
+			this.aliases.add(arg);
+		}
+	}
+	
+	public void addAlias(String arg0)
+	{
+		addAliases(arg0);
+	}
+	
 	// { INFORMATION } //
 	
 	public void setDesc(String arg0)
@@ -441,7 +456,7 @@ public class TransCommand implements Init
 		
 		for (TransCommand cmds : this.subCommands)
 		{
-			if (!cmds.aliases.contains(arg0)) continue;
+			if ( !cmds.aliases.contains(arg0) ) continue;
 			
 			ret = cmds;
 			break;
@@ -475,7 +490,7 @@ public class TransCommand implements Init
 		TransCommand intParent = this.parent;
 		String ret = this.getLabel();
 		
-		while (intParent!=null)
+		while (intParent != null)
 		{
 			if (intParent.aliases.size() <= 0)
 			{
