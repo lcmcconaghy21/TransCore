@@ -1,5 +1,5 @@
 name: TransCore
-version: 1.0.0_BETA
+version: 1.0.1_BETA
 main: com.lcmcconaghy.java.transcore.TransCore
 description: <d>TransCore <b>is an easily adaptable, customizable plugin that aids in plugin development.
 softdepend: [Vault]
