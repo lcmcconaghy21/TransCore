@@ -344,7 +344,7 @@ public class Message
 	{
 		if (this.component.getExtra()==null || this.component.getExtra().size()<=0) return this;
 		
-		return UtilGeneral.titleize(getText());
+		return UtilGeneral.titleize(getText()).format();
 	}
 	
 	/**
