@@ -67,7 +67,7 @@ public class TransCommand implements Init
 			return;
 		}
 		
-		if (isParent())
+		if ( isParent() )
 		{
 			if (this.getHelpCommand()==null)
 			{
