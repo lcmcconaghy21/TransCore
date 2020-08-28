@@ -23,11 +23,11 @@ public class TransBukkitCommand extends BukkitCommand
 	{
 		super(arg0.getLabel());
 		
-		if (arg0==null) TransCore.get().log("For some reason, the parameter is null.");
+		if (arg0 == null) TransCore.get().log("For some reason, the parameter is null.");
 		
 		this.command = arg0;
 		
-		if (this.command==null) TransCore.get().log("The command is null for some reason.");
+		if (this.command == null) TransCore.get().log("The command is null for some reason.");
 	}
 	
 	// { EXECUTION } //
@@ -55,13 +55,18 @@ public class TransBukkitCommand extends BukkitCommand
 	{	
 		TransCommand base = this.command;
 		
-		if (base==null) return new ArrayList<String>();
+		// IF A CORE COMMAND CANNOT BE FOUND, THERE ARE NO ARGUMENTS
+		if (base == null) return new ArrayList<String>();
 		
+		// IF COMMAND IS NOT A PARENT AND HAS NO ARGUMENTS,
+		// MEANING THAT IT ONLY NEEDS TO BE CALLED TO PERFORM
+		// ITS FUNCTIONS
 		if (!base.isParent() && base.arguments.size()<=0)
 		{
 			return new ArrayList<String>();
 		}
 		
+		// WHILE ARGUMENTS TO BASE EXIST
 		while (args.length>1)
 		{
 			if (!base.isParent()) break;
@@ -84,10 +89,12 @@ public class TransBukkitCommand extends BukkitCommand
 			args = repl;
 		}
 		
+		// IF MORE SUBCOMMANDS EXIST...
 		if (base.isParent())
 		{
 			List<String> aliases = new ArrayList<String>();
 			
+			//... ADD ALL OF THEIR ALIASES AS TABCOMPLETE OPTIONS
 			for (TransCommand commands : base.subCommands)
 			{
 				aliases.addAll(commands.getAliases());
@@ -107,8 +114,10 @@ public class TransBukkitCommand extends BukkitCommand
 			return new ArrayList<String>();
 		}
 		
+		// IF NO REGISTERED ARGUMENT EXISTS FOR THAT POSITION...
 		if (argument==null)
 		{
+			//... RETURN NO TABCOMPLETE OPTIONS
 			return new ArrayList<String>();
 		}
 		

@@ -1,7 +1,6 @@
 package com.lcmcconaghy.java.transcore.command;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 import org.bukkit.Bukkit;
@@ -33,7 +32,8 @@ public class TransCommand implements Init
 	
 	protected String desc;
 	protected String permission;
-	protected LinkedHashMap<Argument<?>,Boolean> arguments = new LinkedHashMap<Argument<?>,Boolean>();
+	protected List<Argument<?>> arguments = new ArrayList<Argument<?>>();
+	protected List<Boolean> required = new ArrayList<Boolean>();
 	protected List<TransCommand> subCommands = new ArrayList<TransCommand>();
 	
 	protected TransPlugin plugin;
@@ -268,7 +268,8 @@ public class TransCommand implements Init
 		arg0.setDisplay(arg1, this);
 		arg0.setConcat(arg2, this);
 		
-		this.arguments.put(arg0, arg3);
+		this.arguments.add(arg0);
+		this.required.add(arg3);
 	}
 	
 	/**
@@ -351,22 +352,10 @@ public class TransCommand implements Init
 	
 	public Argument<?> getArgumentAt(int arg0)
 	{
-		Argument<?> ret = null;
-		int count = -1;
+		// IF THERE ARE NO ARGUMENTS AT DEFINED POSITION
+		if (this.arguments.size() <= arg0) return null;
 		
-		if (arg0<=count) return null;
-		
-		for (Argument<?> arg : this.arguments.keySet())
-		{
-			count++;
-			
-			if (count!=arg0) continue;
-			
-			ret = arg;
-			break;
-		}
-		
-		return ret;
+		return this.arguments.get(arg0);
 	}
 	
 	public Argument<?> getNextArgument()
@@ -460,9 +449,14 @@ public class TransCommand implements Init
 		
 		if (this.isParent()) return ret;
 		
-		for (Argument<?> arg : this.arguments.keySet())
+		for (int i = 0; i<this.arguments.size(); i++)
 		{
-			if (arguments.get(arg) == false) ret += " {"+arg.getDisplay(this)+"}";
+			Argument<?> arg = this.arguments.get(i);
+			
+			// CHECK IF IS NOT REQUIRED
+			if (this.required.get(i) == false) ret += " {"+arg.getDisplay(this)+"}";
+			
+			// IF IS REQUIRED
 			else ret += " ["+arg.getDisplay(this)+"]";
 		}
 		
