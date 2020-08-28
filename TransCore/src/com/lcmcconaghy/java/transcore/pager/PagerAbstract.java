@@ -22,7 +22,6 @@ public abstract class PagerAbstract<T> implements Pager<T>
 	
 	private String name;
 	private Map<Integer, List<T>> lines = new HashMap<Integer, List<T>>();
-	private List<T> coll;
 	
 	// { CONSTRUCTOR } //
 	
@@ -30,42 +29,23 @@ public abstract class PagerAbstract<T> implements Pager<T>
 	 * @param arg0 String title
 	 * @param args Collection of generic type
 	 */
+	@SuppressWarnings("unchecked")
 	public PagerAbstract(String arg0, List<T> args)
 	{
 		this.name = arg0;
-		this.coll = args;
-		int key = 1;
 		int last = 0;
 		
-		if (coll.size()<=5)
+		for (int k = 0; k < args.size()/5; k++)
 		{
-			List<T> line = new ArrayList<T>();
+			if (args.size() <= last) break;
 			
-			for (int i = 0; i<args.size(); i++)
+			for (int v = 0; v < 5; v++)
 			{
-				line.add(args.get(i));
-			}
-			this.lines.put(0, line);
-			
-			return;
-		}
-		
-		while (key<coll.size()/5)
-		{
-			List<T> line = new ArrayList<T>();
-			
-			for (int v = 0; v<5; v++)
-			{
-				if (args.size()>=last) break;
+				if (args.size() <= last) break;
 				
-				line.add(args.get(last));
+				this.lines.put(k, (List<T>) args.get(last));
 				last++;
 			}
-			
-			this.lines.put(key, line);
-			key++;
-			
-			if (args.size()>=last) break;
 		}
 		
 	}
