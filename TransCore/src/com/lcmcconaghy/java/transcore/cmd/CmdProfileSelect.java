@@ -16,7 +16,7 @@ public class CmdProfileSelect extends TransCommand
 	
 	public CmdProfileSelect()
 	{
-		super("select");
+		this.addAlias("select");
 		
 		this.setPerm(TransPerm.PROFILE_SELECT);
 		this.setDesc("play as a profile");

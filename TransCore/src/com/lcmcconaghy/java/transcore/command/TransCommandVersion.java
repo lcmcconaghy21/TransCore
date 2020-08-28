@@ -16,7 +16,7 @@ public class TransCommandVersion extends TransCommand
 	
 	public TransCommandVersion(TransPlugin arg0)
 	{
-		super("version", "v");
+		this.addAliases("version");
 		
 		this.setDesc("check plugin information");
 		

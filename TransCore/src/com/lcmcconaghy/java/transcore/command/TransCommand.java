@@ -41,19 +41,6 @@ public class TransCommand implements Init
 	protected TransCommand parent;
 	protected TransCommandHelp help;
 	
-	// { CONSTRUCTOR } //
-	
-	public TransCommand(String...aliases)
-	{
-		for (String alias : aliases)
-		{
-			this.aliases.add(alias);
-		}
-		
-		this.internalCommand = new TransBukkitCommand(this);
-		this.internalCommand.setLabel(aliases[0]);
-	}
-	
 	// { EXECUTION } //
 	
 	public void executeOuter(CommandSender arg0, String[] args)
@@ -190,6 +177,15 @@ public class TransCommand implements Init
 	public void initialize(boolean arg0, TransPlugin arg1)
 	{
 		if (!arg0) return;
+		
+		if ( this.getAliases().size() <= 0 )
+		{
+			System.out.println("Could not implement command. No aliases registered for command "
+					          +this.getClass().getName());
+			return;
+		}
+		
+		this.internalCommand = new TransBukkitCommand(this);
 		
 		this.plugin = arg1;
 		

@@ -15,7 +15,7 @@ public class TransCommandReload extends TransCommand
 	
 	public TransCommandReload(TransPlugin arg0)
 	{
-		super("reload");
+		this.addAliases("reload", "rl");
 		
 		this.setDesc("reload plugin");
 		this.setPerm(TransPerm.RELOAD);

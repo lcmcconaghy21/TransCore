@@ -11,7 +11,7 @@ public class TransCommandHelp extends TransCommand
 	
 	public TransCommandHelp(TransCommand arg0)
 	{
-		super("help", "?");
+		this.addAliases("help", "?");
 		
 		this.parent = arg0;
 		

@@ -15,7 +15,7 @@ public class CmdProfileCreate extends TransCommand
 	
 	public CmdProfileCreate()
 	{
-		super("create");
+		this.addAlias("create");
 		
 		this.setPerm(TransPerm.PROFILE_CREATE);
 		this.setDesc("create a profile");

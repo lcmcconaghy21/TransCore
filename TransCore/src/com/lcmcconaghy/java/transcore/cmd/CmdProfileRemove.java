@@ -15,7 +15,7 @@ public class CmdProfileRemove extends TransCommand
 	
 	public CmdProfileRemove()
 	{
-		super("remove");
+		this.addAlias("remove");
 		
 		this.setPerm(TransPerm.PROFILE_REMOVE);
 		this.setDesc("detach a profile from yourself");
