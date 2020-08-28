@@ -251,9 +251,7 @@ public class Message
 	 */
 	public Message error()
 	{
-		setText(format("<4>Error: <c>"+this.getText()));
-		
-		return this;
+		return setText(format("<4>Error: <c>"+this.getText()));
 	}
 	
 	/**
