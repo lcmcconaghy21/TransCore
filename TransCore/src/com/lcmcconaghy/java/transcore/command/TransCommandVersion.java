@@ -14,7 +14,7 @@ public class TransCommandVersion extends TransCommand
 	
 	// { CONSTRUCTOR } //
 	
-	public TransCommandVersion(TransPlugin arg0) throws TransCommandException
+	public TransCommandVersion(TransPlugin arg0)
 	{
 		super("version", "v");
 		

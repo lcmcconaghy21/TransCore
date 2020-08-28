@@ -9,7 +9,7 @@ public class TransCommandHelp extends TransCommand
 	
 	// { CONSTRUCTOR } //
 	
-	public TransCommandHelp(TransCommand arg0) throws TransCommandException
+	public TransCommandHelp(TransCommand arg0)
 	{
 		super("help", "?");
 		

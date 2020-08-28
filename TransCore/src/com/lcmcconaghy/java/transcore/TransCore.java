@@ -10,7 +10,6 @@ import com.lcmcconaghy.java.transcore.economy.TransEco;
 import com.lcmcconaghy.java.transcore.engine.Engine;
 import com.lcmcconaghy.java.transcore.engine.EnginePlayer;
 import com.lcmcconaghy.java.transcore.engine.EngineServer;
-import com.lcmcconaghy.java.transcore.exception.TransCommandException;
 import com.lcmcconaghy.java.transcore.store.Config;
 import com.lcmcconaghy.java.transcore.store.StoreCollection;
 import com.lcmcconaghy.java.transcore.store.serializable.Serializable;
@@ -78,16 +77,7 @@ public class TransCore extends TransPlugin
 	@Override
 	public List<TransCommand> getTransCommands()
 	{
-		try
-		{
-			return UtilGeneral.list(new CmdProfile());
-		}
-		catch (TransCommandException e)
-		{
-			e.printStackTrace();
-		}
-		
-		return null;
+		return UtilGeneral.list(new CmdProfile());
 	}
 
 	@Override

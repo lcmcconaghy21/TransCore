@@ -14,7 +14,7 @@ public class CmdProfileSelect extends TransCommand
 	
 	// { CONSTRUCTOR } //
 	
-	public CmdProfileSelect() throws TransCommandException
+	public CmdProfileSelect()
 	{
 		super("select");
 		

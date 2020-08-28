@@ -13,7 +13,7 @@ public class CmdProfileRemove extends TransCommand
 	
 	// { CONSTRUCTOR } //
 	
-	public CmdProfileRemove() throws TransCommandException
+	public CmdProfileRemove()
 	{
 		super("remove");
 		

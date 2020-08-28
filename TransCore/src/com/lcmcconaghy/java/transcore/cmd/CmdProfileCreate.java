@@ -13,7 +13,7 @@ public class CmdProfileCreate extends TransCommand
 	
 	// { CONSTRUCTOR } //
 	
-	public CmdProfileCreate() throws TransCommandException
+	public CmdProfileCreate()
 	{
 		super("create");
 		

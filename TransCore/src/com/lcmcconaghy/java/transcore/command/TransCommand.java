@@ -43,16 +43,11 @@ public class TransCommand implements Init
 	
 	// { CONSTRUCTOR } //
 	
-	public TransCommand(String...aliases) throws TransCommandException
+	public TransCommand(String...aliases)
 	{
 		for (String alias : aliases)
 		{
 			this.aliases.add(alias);
-		}
-		
-		if (this.aliases.size()<=0)
-		{
-			throw new TransCommandException("No aliases provided for command in class "+this.getClass().getName());
 		}
 		
 		this.internalCommand = new TransBukkitCommand(this);
@@ -76,15 +71,8 @@ public class TransCommand implements Init
 		{
 			if (this.getHelpCommand()==null)
 			{
-				try
-				{
-					this.help = new TransCommandHelp(this);
-					this.addSubCommand(help);
-				}
-				catch (TransCommandException e)
-				{
-					e.printStackTrace();
-				}
+				this.help = new TransCommandHelp(this);
+				this.addSubCommand(help);
 			}
 			
 			if (args.length==0)
@@ -204,14 +192,7 @@ public class TransCommand implements Init
 		
 		if (this.isParent())
 		{
-			try
-			{
-				this.help = new TransCommandHelp(this);
-			}
-			catch (TransCommandException e)
-			{
-				e.printStackTrace();
-			}
+			this.help = new TransCommandHelp(this);
 			
 			this.addSubCommand(0, help);
 		}
@@ -281,15 +262,8 @@ public class TransCommand implements Init
 	 * @param arg3 Boolean has default value
 	 * @throws TransCommandException 
 	 */
-	public void addArgument(ArgumentAbstract<?> arg0, String arg1, boolean arg2, boolean arg3) throws TransCommandException
+	public void addArgument(ArgumentAbstract<?> arg0, String arg1, boolean arg2, boolean arg3)
 	{
-		int lastPlace = this.arguments.keySet().size()-2;
-		
-		if (getArgumentAt(lastPlace)!=null && getArgumentAt(lastPlace).willConcat(this))
-		{
-			throw new TransCommandException("Cannot add Argument after a concat Argument!");
-		}
-		
 		arg0.setDisplay(arg1, this);
 		arg0.setConcat(arg2, this);
 		
@@ -303,7 +277,7 @@ public class TransCommand implements Init
 	 * @param arg2 Boolean allow concat
 	 * @throws TransCommandException 
 	 */
-	public void addArgument(ArgumentAbstract<?> arg0, String arg1, boolean arg2) throws TransCommandException
+	public void addArgument(ArgumentAbstract<?> arg0, String arg1, boolean arg2)
 	{
 		addArgument(arg0, arg1, arg2, false);
 	}
@@ -314,7 +288,7 @@ public class TransCommand implements Init
 	 * @param arg1 String display name
 	 * @throws TransCommandException 
 	 */
-	public void addArgument(ArgumentAbstract<?> arg0, String arg1) throws TransCommandException
+	public void addArgument(ArgumentAbstract<?> arg0, String arg1)
 	{
 		addArgument(arg0, arg1, false, false);
 	}
@@ -326,6 +300,7 @@ public class TransCommand implements Init
 		{
 			throw new TransCommandException("Arguments are null, cannot read them dimwit.");
 		}
+		
 		if (args.length<=tracer)
 		{
 			error("This command requires more arguments in order to be performed.");
@@ -501,7 +476,7 @@ public class TransCommand implements Init
 		{
 			if (intParent.aliases.size() <= 0)
 			{
-				throw new TransCommandException("No aliases registered for command "+this.getClass().getName());
+				throw new TransCommandException("No aliases registered for command "+intParent.getClass().getName());
 			}
 			
 			ret = intParent.aliases.get(0)+" "+ret;

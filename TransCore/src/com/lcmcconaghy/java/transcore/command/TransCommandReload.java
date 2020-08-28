@@ -13,7 +13,7 @@ public class TransCommandReload extends TransCommand
 	
 	// { CONSTRUCTOR } //
 	
-	public TransCommandReload(TransPlugin arg0) throws TransCommandException
+	public TransCommandReload(TransPlugin arg0)
 	{
 		super("reload");
 		
