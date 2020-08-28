@@ -16,6 +16,8 @@ public class CmdProfile extends TransCommand
 		this.addSubCommand(new CmdProfileCreate());
 		this.addSubCommand(new CmdProfileRemove());
 		
+		this.addSubCommand(new CmdProfileSelect());
+		
 		this.addSubCommand(new TransCommandVersion( TransCore.get() ));
 	}
 	
