@@ -222,6 +222,8 @@ public class TransCommand implements Init
 	 */
 	public boolean hasPerm()
 	{
+		if (permission == null) return true;
+		
 		return this.sender.hasPermission(permission);
 	}
 	
@@ -256,7 +258,7 @@ public class TransCommand implements Init
 	{
 		if ( !isHidden() ) return true;
 		
-		if ( arg0.hasPermission(permission) ) return true;
+		if ( hasPerm() ) return true;
 		
 		return false;
 	}
