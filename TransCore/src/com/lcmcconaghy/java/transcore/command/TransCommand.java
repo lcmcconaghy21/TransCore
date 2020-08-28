@@ -29,6 +29,7 @@ public class TransCommand implements Init
 	private String[] args;
 	private int tracer = -1;
 	private boolean hidden = false;
+	private String label;
 	private List<String> aliases = new ArrayList<String>();
 	
 	protected String desc;
@@ -391,9 +392,14 @@ public class TransCommand implements Init
 	
 	public void addAliases(String...args)
 	{
-		for (String arg : args)
+		for (int i = 0; i<args.length; i++)
 		{
-			this.aliases.add(arg);
+			if (this.label == null && i==0)
+			{
+				this.label = args[i];
+			}
+			
+			this.aliases.add(args[i]);
 		}
 	}
 	
@@ -407,16 +413,16 @@ public class TransCommand implements Init
 		return this.aliases;
 	}
 	
+	public String getLabel()
+	{
+		return this.label;
+	}
+	
 	// { INFORMATION } //
 	
 	public void setDesc(String arg0)
 	{
 		this.desc = arg0;
-	}
-	
-	public String getLabel()
-	{
-		return this.internalCommand.getLabel();
 	}
 	
 	public String getDesc()
@@ -493,12 +499,12 @@ public class TransCommand implements Init
 		
 		while (intParent != null)
 		{
-			if (intParent.aliases.size() <= 0)
+			if (intParent.getLabel() == null)
 			{
 				throw new TransCommandException("No aliases registered for command "+intParent.getClass().getName());
 			}
 			
-			ret = intParent.aliases.get(0)+" "+ret;
+			ret = intParent.getLabel()+" "+ret;
 			
 			intParent = intParent.parent;
 		}

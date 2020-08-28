@@ -21,7 +21,7 @@ public class TransBukkitCommand extends BukkitCommand
 	@SuppressWarnings("unused")
 	public TransBukkitCommand(TransCommand arg0)
 	{
-		super(arg0.getAliases().get(0));
+		super(arg0.getLabel());
 		
 		if (arg0==null) TransCore.get().log("For some reason, the parameter is null.");
 		
