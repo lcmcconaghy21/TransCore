@@ -27,7 +27,7 @@ public class TransCommandHelp extends TransCommand
 	{
 		int page = this.readArgument(1);
 		
-		PagerHelpCommand pager = new PagerHelpCommand(this.parent);
+		PagerHelpCommand pager = new PagerHelpCommand(this.parent, sender);
 		
 		pager.sendPage(page, this, sender);
 	}
