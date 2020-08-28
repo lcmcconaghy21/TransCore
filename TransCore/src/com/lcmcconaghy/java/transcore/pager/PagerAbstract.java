@@ -29,7 +29,6 @@ public abstract class PagerAbstract<T> implements Pager<T>
 	 * @param arg0 String title
 	 * @param args Collection of generic type
 	 */
-	@SuppressWarnings("unchecked")
 	public PagerAbstract(String arg0, List<T> args)
 	{
 		this.name = arg0;
@@ -43,7 +42,18 @@ public abstract class PagerAbstract<T> implements Pager<T>
 			{
 				if (args.size() <= last) break;
 				
-				this.lines.put(k, (List<T>) args.get(last));
+				T obj = args.get(last);
+				
+				List<T> list = new ArrayList<T>();
+				
+				if (this.lines.containsKey(k))
+				{
+					list = this.lines.get(0);
+				}
+				
+				list.add(obj);
+				
+				this.lines.put(k, list);
 				last++;
 			}
 		}
