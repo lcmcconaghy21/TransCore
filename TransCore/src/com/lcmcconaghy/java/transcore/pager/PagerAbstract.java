@@ -101,10 +101,10 @@ public abstract class PagerAbstract<T> implements Pager<T>
 		if (this.lines.get(nextPage)!=null) right = right.color(ChatColor.AQUA)
 				                                       .command(arg1, ""+nextPage);
 		
-		final Message bottom = new Message(new Message("=").repeat(8).color(ChatColor.GREEN),
+		final Message bottom = new Message(new Message("=").repeat(3).color(ChatColor.GREEN),
 				  left,
 				  right,
-				  new Message("=").repeat(8).color(ChatColor.GREEN));
+				  new Message("=").repeat(3).color(ChatColor.GREEN));
 		
 		Bukkit.getScheduler().runTaskAsynchronously(TransCore.get(), new Runnable()
 		{

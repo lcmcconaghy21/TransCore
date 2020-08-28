@@ -40,7 +40,6 @@ public class TransCommand implements Init
 	protected TransPlugin plugin;
 	private TransBukkitCommand internalCommand;
 	protected TransCommand parent;
-	protected TransCommandHelp help;
 	
 	// { EXECUTION } //
 	
@@ -49,7 +48,7 @@ public class TransCommand implements Init
 		this.sender = arg0;
 		this.args = args;
 		
-		if (getPermissionNode()!=null && !hasPerm())
+		if (getPermissionNode()!=null && !hasPerm(sender))
 		{
 			error("You do not have permission to execute this command!");
 			return;
@@ -57,12 +56,6 @@ public class TransCommand implements Init
 		
 		if ( isParent() )
 		{
-			if (this.getHelpCommand()==null)
-			{
-				this.help = new TransCommandHelp(this);
-				this.addSubCommand(help);
-			}
-			
 			if (args.length==0)
 			{
 				String[] helpArgs = new String[1];
@@ -192,9 +185,7 @@ public class TransCommand implements Init
 		
 		if (this.isParent())
 		{
-			this.help = new TransCommandHelp(this);
-			
-			this.addSubCommand(0, help);
+			this.addSubCommand(0, getHelpCommand());
 		}
 		
 		TransServer.get().registerCommand(this);
@@ -220,12 +211,11 @@ public class TransCommand implements Init
 	 * Check if CommandSender can execute command
 	 * @return whether CommandSender can execute command
 	 */
-	public boolean hasPerm()
+	public boolean hasPerm(CommandSender sender)
 	{
 		if (permission == null) return true;
-		if (sender == null) return true;
 		
-		return this.sender.hasPermission(permission);
+		return sender.hasPermission(permission);
 	}
 	
 	/**
@@ -257,11 +247,11 @@ public class TransCommand implements Init
 	
 	public boolean isHidden(CommandSender arg0)
 	{
-		if ( !isHidden() ) return true;
+		if ( !isHidden() ) return false;
 		
-		if ( hasPerm() ) return true;
+		if ( hasPerm(arg0) ) return false;
 		
-		return false;
+		return true;
 	}
 	
 	// { ARGS } //
@@ -406,7 +396,11 @@ public class TransCommand implements Init
 		
 		for (TransCommand command : this.subCommands)
 		{
-			if ( command.isHidden(sender) ) continue;
+			if ( command.isHidden(sender) )
+			{
+				continue;
+			}
+			
 			commands.add(command);
 		}
 		
@@ -479,7 +473,7 @@ public class TransCommand implements Init
 	
 	public TransCommandHelp getHelpCommand()
 	{
-		return this.help;
+		return new TransCommandHelp(this);
 	}
 	
 	public TransCommand getSubCommand(String arg0)

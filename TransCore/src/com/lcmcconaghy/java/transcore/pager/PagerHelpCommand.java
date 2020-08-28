@@ -22,11 +22,6 @@ public class PagerHelpCommand extends PagerAbstract<TransCommand>
 	
 	public Message sendLine(TransCommand arg0, CommandSender arg1)
 	{
-		if (arg0.isHidden())
-		{
-			return null;
-		}
-		
 		String fullCommand = "";
 		
 		try
