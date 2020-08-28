@@ -1,9 +1,8 @@
 package com.lcmcconaghy.java.transcore.command;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
@@ -34,7 +33,7 @@ public class TransCommand implements Init
 	
 	protected String desc;
 	protected String permission;
-	protected Map<Argument<?>,Boolean> arguments = new HashMap<Argument<?>,Boolean>();
+	protected LinkedHashMap<Argument<?>,Boolean> arguments = new LinkedHashMap<Argument<?>,Boolean>();
 	protected List<TransCommand> subCommands = new ArrayList<TransCommand>();
 	
 	protected TransPlugin plugin;
@@ -310,6 +309,12 @@ public class TransCommand implements Init
 		}
 		
 		Argument<T> arg = (Argument<T>) getNextArgument();
+		
+		if (arg == null)
+		{
+			error("Could not find argument for latest parameter");
+			throw new TransCommandException("No argument for position "+this.tracer++);
+		}
 		
 		if (arg.willConcat(this))
 		{
