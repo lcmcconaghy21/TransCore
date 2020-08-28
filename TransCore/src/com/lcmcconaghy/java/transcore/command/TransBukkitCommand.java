@@ -21,7 +21,7 @@ public class TransBukkitCommand extends BukkitCommand
 	@SuppressWarnings("unused")
 	public TransBukkitCommand(TransCommand arg0)
 	{
-		super(arg0.aliases.get(0));
+		super(arg0.getAliases().get(0));
 		
 		if (arg0==null) TransCore.get().log("For some reason, the parameter is null.");
 		
@@ -45,7 +45,7 @@ public class TransBukkitCommand extends BukkitCommand
 	@Override
 	public List<String> getAliases()
 	{
-		return this.command.aliases;
+		return this.command.getAliases();
 	}
 	
 	// { TAB COMPLETE } //
@@ -90,7 +90,7 @@ public class TransBukkitCommand extends BukkitCommand
 			
 			for (TransCommand commands : base.subCommands)
 			{
-				aliases.addAll(commands.aliases);
+				aliases.addAll(commands.getAliases());
 			}
 			
 			return aliases;

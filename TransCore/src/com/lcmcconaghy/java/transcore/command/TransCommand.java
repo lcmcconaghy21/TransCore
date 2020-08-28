@@ -406,6 +406,11 @@ public class TransCommand implements Init
 		addAliases(arg0);
 	}
 	
+	public List<String> getAliases()
+	{
+		return this.aliases;
+	}
+	
 	// { INFORMATION } //
 	
 	public void setDesc(String arg0)
