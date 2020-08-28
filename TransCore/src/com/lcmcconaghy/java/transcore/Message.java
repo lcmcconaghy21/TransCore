@@ -217,7 +217,7 @@ public class Message
 		
 		try
 		{
-			fullCommand = arg0.getFullCommand();
+			fullCommand = "/"+arg0.getFullCommand();
 		}
 		catch (TransCommandException e)
 		{
