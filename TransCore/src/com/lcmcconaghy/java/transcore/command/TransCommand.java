@@ -223,6 +223,7 @@ public class TransCommand implements Init
 	public boolean hasPerm()
 	{
 		if (permission == null) return true;
+		if (sender == null) return true;
 		
 		return this.sender.hasPermission(permission);
 	}
