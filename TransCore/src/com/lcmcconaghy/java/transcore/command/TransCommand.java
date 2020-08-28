@@ -252,6 +252,15 @@ public class TransCommand implements Init
 		return this.hidden;
 	}
 	
+	public boolean isHidden(CommandSender arg0)
+	{
+		if ( !isHidden() ) return true;
+		
+		if ( arg0.hasPermission(permission) ) return true;
+		
+		return false;
+	}
+	
 	// { ARGS } //
 	
 	/**
@@ -384,8 +393,21 @@ public class TransCommand implements Init
 	}
 	
 	public List<TransCommand> getSubCommands()
-	{
+	{	
 		return this.subCommands;
+	}
+	
+	public List<TransCommand> getVisibleSubCommands(CommandSender sender)
+	{
+		List<TransCommand> commands = new ArrayList<TransCommand>();
+		
+		for (TransCommand command : this.subCommands)
+		{
+			if ( command.isHidden(sender) ) continue;
+			commands.add(command);
+		}
+		
+		return commands;
 	}
 	
 	// { ALIASES } //
