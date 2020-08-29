@@ -354,8 +354,15 @@ public class Message
 		String set = this.component.getText();
 		
 		set = format(set);
-		
 		setText(set);
+		
+		for (BaseComponent extra : this.component.getExtra())
+		{
+			if (!(extra instanceof TextComponent)) continue;
+			
+			TextComponent text = (TextComponent) extra;
+			text.setText( format( text.getText() ) );
+		}
 		
 		return this;
 	}
