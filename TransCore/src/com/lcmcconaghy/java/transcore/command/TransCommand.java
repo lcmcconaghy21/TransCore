@@ -88,7 +88,8 @@ public class TransCommand implements Init
 		}
 		catch (TransCommandException e)
 		{
-			e.printStackTrace();
+			error(e.getMessage());
+			return;
 		}
 	}
 	
@@ -320,7 +321,7 @@ public class TransCommand implements Init
 	}
 	
 	@SuppressWarnings("unchecked")
-	public <T> T readArgument(T arg0)
+	public <T> T readArgument(T arg0) throws TransCommandException
 	{
 		if (args.length<=0)
 		{
