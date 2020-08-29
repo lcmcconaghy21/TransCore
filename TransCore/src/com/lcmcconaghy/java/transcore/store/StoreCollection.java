@@ -147,9 +147,14 @@ public class StoreCollection<T extends StoreItem> extends ArrayList<T> implement
 			
 			if (get == null) continue;
 			
+			if (json.getSerializable(declared.getName(), get.getClass()) != null)
+			{
+				get = json.getSerializable(declared.getName(), get.getClass());
+			}
+			
 			try
 			{
-				declared.set(ret, json.get(declared.getName()));
+				declared.set(ret, get);
 			}
 			catch (IllegalArgumentException | IllegalAccessException e)
 			{
