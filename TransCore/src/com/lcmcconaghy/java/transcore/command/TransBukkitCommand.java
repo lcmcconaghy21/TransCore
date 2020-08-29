@@ -89,6 +89,9 @@ public class TransBukkitCommand extends BukkitCommand
 			args = repl;
 		}
 		
+		// IF SUBCOMMAND DOES NOT EXIST
+		if (base == null) return new ArrayList<String>();
+		
 		// IF MORE SUBCOMMANDS EXIST...
 		if (base.isParent())
 		{
