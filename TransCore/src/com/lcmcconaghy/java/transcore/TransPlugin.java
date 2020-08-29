@@ -207,11 +207,17 @@ public abstract class TransPlugin extends JavaPlugin implements TPlugin
 		log("<7>-----------------------------------------------");
 	}
 	
+	/**
+	 * @return ConsoleSender which will log data
+	 */
 	public ConsoleCommandSender getConsoleLogger()
 	{
 		return this.console;
 	}
 	
+	/**
+	 * @return Plugin version quickly
+	 */
 	public String getVersion()
 	{
 		return this.version;

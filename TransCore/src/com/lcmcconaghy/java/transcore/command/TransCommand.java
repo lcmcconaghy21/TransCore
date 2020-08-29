@@ -3,6 +3,7 @@ package com.lcmcconaghy.java.transcore.command;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -26,6 +27,7 @@ public class TransCommand implements Init
 	protected CommandSender sender;
 	private String[] args;
 	private int tracer = -1;
+	private int concatCount = 0;
 	private boolean hidden = false;
 	private String label;
 	private List<String> aliases = new ArrayList<String>();
@@ -47,14 +49,17 @@ public class TransCommand implements Init
 		this.sender = arg0;
 		this.args = args;
 		
+		// CHECK IF SENDER CAN EXECUTE COMMAND
 		if (getPermissionNode()!=null && !hasPerm(sender))
 		{
 			error("You do not have permission to execute this command!");
 			return;
 		}
 		
+		// CHECK IF SUBCOMMANDS EXIST
 		if ( isParent() )
 		{
+			// IF SENDER SENT NO SUBCOMMANDS
 			if (args.length==0)
 			{
 				String[] helpArgs = new String[1];
@@ -64,23 +69,27 @@ public class TransCommand implements Init
 				return;
 			}
 			
+			// IF SENDER STILL TECHNICALLY SENT NO SUBCOMMANDS
 			if (args[0]==null || args[0]=="")
 			{
 				this.getHelpCommand().executeOuter(sender, args);
 				return;
 			}
 			
+			// IF SUBCOMMAND ENTERED DOES NOT EXIST
 			if (getSubCommand(args[0])==null)
 			{
 				error("The command <a>"+args[0]+" <c>does not exist!");
 				return;
 			}
 			
+			// EXECUTE EXISTING SUBCOMMAND
 			getSubCommand(args[0]).executeOuter(sender, getArgsMinus(args));
 			return;
 		}
 		
 		this.tracer = -1;
+		this.concatCount = 0;
 		
 		try
 		{
@@ -286,12 +295,14 @@ public class TransCommand implements Init
 	@SuppressWarnings("unchecked")
 	public <T> T readArgument() throws TransCommandException
 	{
+		// IF PLUGIN REQUIRES NO ARGUMENTS
 		if (arguments==null || arguments.size()<=0)
 		{
 			throw new TransCommandException("Arguments are null, cannot read them dimwit.");
 		}
 		
-		if (args.length<=tracer)
+		// IF SENDER HAS NOT SENT ALL REQUIRED ARGUMENTS
+		if (args.length <= tracer)
 		{
 			error("This command requires more arguments in order to be performed.");
 			throw new TransCommandException("Unable to parse. Too few arguments.");
@@ -299,20 +310,25 @@ public class TransCommand implements Init
 		
 		Argument<T> arg = (Argument<T>) getNextArgument();
 		
+		// IF NEXT ARGUMENT DOES NOT EXIST
 		if (arg == null)
 		{
 			error("Could not find argument for latest parameter");
 			throw new TransCommandException("No argument for position "+this.tracer++);
 		}
 		
+		// IF ARGUMENT WILL BE EXECUTED WITH ALL FOLLOWING PARAMETERS
 		if (arg.willConcat(this))
 		{
-			String complete = "";
+			String[] parts = new String[ (args.length-1) - tracer ];
 			
 			for (int i = tracer; i<this.args.length; i++)
 			{
-				complete += args[i];
+				parts[concatCount] = args[i];
+				concatCount++;
 			}
+			
+			String complete = StringUtils.join(parts, " ");
 			
 			return arg.read(complete, sender);
 		}
@@ -323,11 +339,13 @@ public class TransCommand implements Init
 	@SuppressWarnings("unchecked")
 	public <T> T readArgument(T arg0) throws TransCommandException
 	{
+		// IF NO ARGUMENTS WERE SENT BY SENDER
 		if (args.length<=0)
 		{
 			return arg0;
 		}
 		
+		// IF ARGUMENTS ARE MISSING
 		if ((args.length<arguments.size() || args==null) && arguments.size()>=tracer)
 		{
 			return arg0;

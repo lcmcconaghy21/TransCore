@@ -14,6 +14,7 @@ import com.mongodb.DB;
 import com.mongodb.DBCollection;
 
 import de.leonhard.storage.Json;
+import de.leonhard.storage.internal.exceptions.LightningValidationException;
 
 @SuppressWarnings("rawtypes")
 public class StoreCollection<T extends StoreItem> extends ArrayList<T> implements Init
@@ -147,7 +148,18 @@ public class StoreCollection<T extends StoreItem> extends ArrayList<T> implement
 			
 			if (get == null) continue;
 			
-			if (json.getSerializable(declared.getName(), get.getClass()) != null)
+			Object isNull = null;
+			
+			try
+			{
+				isNull = json.getSerializable(declared.getName(), get.getClass());
+			}
+			catch (LightningValidationException exception)
+			{
+				// Nothing, you good boo x
+			}
+			
+			if (isNull != null)
 			{
 				get = json.getSerializable(declared.getName(), get.getClass());
 			}
