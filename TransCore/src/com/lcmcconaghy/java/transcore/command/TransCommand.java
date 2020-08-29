@@ -97,19 +97,6 @@ public class TransCommand implements Init
 		// main command block
 	}
 	
-	@SuppressWarnings("deprecation")
-	public void message(Message arg0)
-	{
-		if (!isPlayer())
-		{
-			plugin.log(arg0.getText());
-			return;
-		}
-		
-		Player player = (Player) sender;
-		arg0.send(player);
-	}
-	
 	public void message(final Message... args)
 	{
 		Bukkit.getScheduler().runTaskAsynchronously(TransCore.get(), new Runnable()
@@ -119,7 +106,7 @@ public class TransCommand implements Init
 			{
 				for (Message message : args)
 				{
-					message.send(sender);
+					message.format().send(sender);
 				}
 			}
 		});
@@ -131,7 +118,7 @@ public class TransCommand implements Init
 	 */
 	public void message(String arg0)
 	{
-		message(new Message(arg0).format());
+		message(new Message("<e>"+arg0).format());
 	}
 	
 	/**
