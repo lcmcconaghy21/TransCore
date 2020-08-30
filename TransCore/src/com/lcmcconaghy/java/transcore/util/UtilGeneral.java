@@ -27,7 +27,8 @@ public class UtilGeneral
 		
 		return new Message(arg).color(ChatColor.AQUA)
 				               .insert("<a>"+side+"<{ ")
-				               .append(" <a>}>"+side);
+				               .append(" <a>}>"+side)
+				               .format();
 	}
 	
 	public static String repeat(String arg0, int arg1)
