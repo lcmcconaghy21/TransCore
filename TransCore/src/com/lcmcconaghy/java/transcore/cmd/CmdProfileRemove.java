@@ -22,6 +22,7 @@ public class CmdProfileRemove extends TransCommand
 	{
 		this.addAlias("remove");
 		
+		this.setRequiresPlayer(true);
 		this.setPerm(TransPerm.PROFILE_REMOVE);
 		this.setDesc("detach a profile from yourself");
 		this.addArgument(ArgumentProfile.get(), "name", true);
@@ -32,12 +33,6 @@ public class CmdProfileRemove extends TransCommand
 	@Override
 	public void execute() throws TransCommandException
 	{
-		if ( !isPlayer() )
-		{
-			error("You must be a player to execute this command.");
-			return;
-		}
-		
 		Profile profile = this.readArgument();
 		
 		if ( !profile.getOwner().getUniqueId().toString()

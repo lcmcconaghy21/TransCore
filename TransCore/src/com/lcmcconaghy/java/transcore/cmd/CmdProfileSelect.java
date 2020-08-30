@@ -22,6 +22,7 @@ public class CmdProfileSelect extends TransCommand
 	{
 		this.addAlias("select");
 		
+		this.setRequiresPlayer(true);
 		this.setPerm(TransPerm.PROFILE_SELECT);
 		this.setDesc("play as a profile");
 		this.addArgument(ArgumentProfile.get(), "name", true);
@@ -31,13 +32,7 @@ public class CmdProfileSelect extends TransCommand
 	
 	@Override
 	public void execute() throws TransCommandException
-	{
-		if ( !isPlayer() )
-		{
-			error("You must be a player to execute that command.");
-			return;
-		}
-		
+	{	
 		Profile profile = this.readArgument();
 		
 		if ( !profile.getOwner().getUniqueId().toString()

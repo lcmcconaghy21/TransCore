@@ -25,6 +25,7 @@ public class TransCommand implements Init
 	// { FIELDS } //
 	
 	protected CommandSender sender;
+	private boolean requiresPlayer = false;
 	private String[] args;
 	private int tracer = -1;
 	private int concatCount = 0;
@@ -48,6 +49,12 @@ public class TransCommand implements Init
 	{
 		this.sender = arg0;
 		this.args = args;
+		
+		if (doesRequirePlayer() && !isPlayer())
+		{
+			error("You must be a player in order to execute this command.");
+			return;
+		}
 		
 		// CHECK IF SENDER CAN EXECUTE COMMAND
 		if (getPermissionNode()!=null && !hasPerm(sender))
@@ -220,6 +227,25 @@ public class TransCommand implements Init
 	public String getPermissionNode()
 	{
 		return this.permission;
+	}
+	
+	// { REQUIRES } //
+	
+	/**
+	 * Set that only Players can execute command
+	 * @param arg0
+	 */
+	public void setRequiresPlayer(boolean arg0)
+	{
+		this.requiresPlayer = arg0;
+	}
+	
+	/**
+	 * @return whether only Players can execute a command
+	 */
+	public boolean doesRequirePlayer()
+	{
+		return this.requiresPlayer;
 	}
 	
 	// { HIDE } //

@@ -22,6 +22,7 @@ public class CmdProfileCreate extends TransCommand
 	{
 		this.addAlias("create");
 		
+		this.setRequiresPlayer(true);
 		this.setPerm(TransPerm.PROFILE_CREATE);
 		this.setDesc("create a profile");
 		this.addArgument(ArgumentString.get(), "name", true);
