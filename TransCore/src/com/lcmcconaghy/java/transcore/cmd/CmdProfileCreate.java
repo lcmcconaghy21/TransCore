@@ -35,7 +35,14 @@ public class CmdProfileCreate extends TransCommand
 	{
 		String name = this.readArgument();
 		
+		if (ProfileCollection.get().has(name))
+		{
+			error("Profile with this name already exists.");
+			return;
+		}
+		
 		Profile profile = ProfileCollection.get().create(name);
+		profile.setName(name);
 		profile.setOwner( IUser.get(sender) );
 		
 		IUser.get( sender ).setActiveProfile(profile);
