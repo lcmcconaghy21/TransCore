@@ -264,17 +264,19 @@ public class Message
 	{
 		String complete = "";
 		
+		if (arg0 <= 0) return this;
+		
 		for (char part : this.component.getText().toCharArray())
 		{
-			int chance = UtilMaths.randomInt((int)arg1);
+			int chance = UtilMaths.randomInt((int) (arg1));
 			
-			if (arg0<=0 || chance>=arg1)
+			if (chance <= arg0)
 			{
-				complete += part;
+				complete += '-';
 				continue;
 			}
 				
-			complete += '-';
+			complete += part;
 		}
 		
 		this.setText(complete);
