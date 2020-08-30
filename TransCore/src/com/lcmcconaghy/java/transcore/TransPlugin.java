@@ -191,7 +191,7 @@ public abstract class TransPlugin extends JavaPlugin implements TPlugin
 	{
 		for (String message : msgs)
 		{
-			getConsoleLogger().sendMessage(Message.format(message));
+			getConsoleLogger().sendMessage(Message.format("<e>"+message));
 		}
 	}
 	
