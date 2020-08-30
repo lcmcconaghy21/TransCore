@@ -5,6 +5,7 @@ import java.util.List;
 import org.bukkit.command.CommandSender;
 
 import com.lcmcconaghy.java.transcore.command.argument.ArgumentAbstract;
+import com.lcmcconaghy.java.transcore.exception.TransCommandException;
 import com.lcmcconaghy.java.transcore.util.UtilGeneral;
 
 public class ArgumentBoolean extends ArgumentAbstract<Boolean>
@@ -17,9 +18,11 @@ public class ArgumentBoolean extends ArgumentAbstract<Boolean>
 	// { ARGUMENT } //
 	
 	@Override
-	public Boolean read(String arg0, CommandSender arg1)
+	public Boolean read(String arg0, CommandSender arg1) throws TransCommandException
 	{
-		return Boolean.valueOf(arg0);
+		boolean ret = Boolean.valueOf(arg0);
+		
+		return ret;
 	}
 
 	@Override

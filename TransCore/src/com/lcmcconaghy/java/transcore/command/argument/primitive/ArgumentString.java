@@ -6,6 +6,7 @@ import java.util.List;
 import org.bukkit.command.CommandSender;
 
 import com.lcmcconaghy.java.transcore.command.argument.ArgumentAbstract;
+import com.lcmcconaghy.java.transcore.exception.TransCommandException;
 
 public class ArgumentString extends ArgumentAbstract<String>
 {
@@ -16,7 +17,7 @@ public class ArgumentString extends ArgumentAbstract<String>
 	
 	// { ARG } //
 	
-	public String read(String arg0, CommandSender arg1)
+	public String read(String arg0, CommandSender arg1) throws TransCommandException
 	{
 		return arg0;
 	}

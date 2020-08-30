@@ -5,6 +5,7 @@ import java.util.List;
 import org.bukkit.command.CommandSender;
 
 import com.lcmcconaghy.java.transcore.command.argument.ArgumentAbstract;
+import com.lcmcconaghy.java.transcore.exception.TransCommandException;
 import com.lcmcconaghy.java.transcore.util.UtilGeneral;
 
 public class ArgumentInteger extends ArgumentAbstract<Integer>
@@ -16,9 +17,20 @@ public class ArgumentInteger extends ArgumentAbstract<Integer>
 	
 	// { ARG } //
 
-	public Integer read(String arg0, CommandSender arg1)
+	public Integer read(String arg0, CommandSender arg1) throws TransCommandException
 	{
-		return Integer.valueOf(arg0);
+		int ret = 1;
+		
+		try
+		{
+			ret = Integer.valueOf(arg0);
+		}
+		catch (NumberFormatException exception)
+		{
+			throw new TransCommandException("Could not format <d>"+arg0+" <c>as integer.");
+		}
+		
+		return ret;
 	}
 
 	public List<String> getTabCompleteList()

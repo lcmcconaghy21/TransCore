@@ -5,6 +5,7 @@ import java.util.List;
 import org.bukkit.command.CommandSender;
 
 import com.lcmcconaghy.java.transcore.command.argument.ArgumentAbstract;
+import com.lcmcconaghy.java.transcore.exception.TransCommandException;
 import com.lcmcconaghy.java.transcore.util.UtilGeneral;
 
 public class ArgumentDouble extends ArgumentAbstract<Double>
@@ -17,9 +18,19 @@ public class ArgumentDouble extends ArgumentAbstract<Double>
 	// { ARGUMENT } //
 	
 	@Override
-	public Double read(String arg0, CommandSender arg1)
+	public Double read(String arg0, CommandSender arg1) throws TransCommandException
 	{
-		return Double.parseDouble(arg0);
+		double ret = 1.0;
+		try
+		{
+			ret = Double.parseDouble(arg0);
+		}
+		catch (NumberFormatException exception)
+		{
+			throw new TransCommandException("Could not format <d>"+arg0+" <c>into a number.");
+		}
+		
+		return ret;
 	}
 
 	@Override

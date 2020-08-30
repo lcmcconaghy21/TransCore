@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.bukkit.command.CommandSender;
 
+import com.lcmcconaghy.java.transcore.exception.TransCommandException;
 import com.lcmcconaghy.java.transcore.store.transcore.Profile;
 import com.lcmcconaghy.java.transcore.store.transcore.ProfileCollection;
 
@@ -26,7 +27,7 @@ public class ArgumentProfile extends ArgumentAbstract<Profile>
 	// { ARGUMENT } //
 	
 	@Override
-	public Profile read(String arg0, CommandSender arg1)
+	public Profile read(String arg0, CommandSender arg1) throws TransCommandException
 	{
 		Profile profile = null;
 		
@@ -36,6 +37,11 @@ public class ArgumentProfile extends ArgumentAbstract<Profile>
 			
 			profile = prof;
 			break;
+		}
+		
+		if (profile == null)
+		{
+			throw new TransCommandException("There is no profile for this name.");
 		}
 		
 		return profile;
