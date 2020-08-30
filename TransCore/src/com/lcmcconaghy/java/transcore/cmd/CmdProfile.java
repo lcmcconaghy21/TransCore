@@ -7,16 +7,21 @@ import com.lcmcconaghy.java.transcore.command.TransCommandVersion;
 public class CmdProfile extends TransCommand
 {
 	
+	// { SINGLETON } //
+	
+	private static CmdProfile i = new CmdProfile();
+	public static CmdProfile get() { return CmdProfile.i; }
+	
 	// { CONSTRUCTOR } //
 	
 	public CmdProfile()
 	{
 		this.addAlias("profile");
 		
-		this.addSubCommand(new CmdProfileCreate());
-		this.addSubCommand(new CmdProfileRemove());
+		this.addSubCommand(CmdProfileCreate.get());
+		this.addSubCommand(CmdProfileRemove.get());
 		
-		this.addSubCommand(new CmdProfileSelect());
+		this.addSubCommand(CmdProfileSelect.get());
 		
 		this.addSubCommand(new TransCommandVersion( TransCore.get() ));
 	}

@@ -11,6 +11,11 @@ import com.lcmcconaghy.java.transcore.store.transcore.ProfileCollection;
 public class CmdProfileCreate extends TransCommand
 {
 	
+	// { SINGLETON } //
+	
+	private static CmdProfileCreate i = new CmdProfileCreate();
+	public static CmdProfileCreate get() { return CmdProfileCreate.i; }
+	
 	// { CONSTRUCTOR } //
 	
 	public CmdProfileCreate()
