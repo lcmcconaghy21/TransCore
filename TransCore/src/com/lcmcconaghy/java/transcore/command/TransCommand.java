@@ -104,7 +104,7 @@ public class TransCommand implements Init
 		}
 		catch (TransCommandException e)
 		{
-			error(e.getMessage());
+			error( Message.format( e.getMessage() ) );
 			return;
 		}
 	}
@@ -346,7 +346,10 @@ public class TransCommand implements Init
 		// IF ARGUMENT WILL BE EXECUTED WITH ALL FOLLOWING PARAMETERS
 		if (arg.willConcat(this))
 		{
-			String[] parts = new String[ (args.length-1) - tracer ];
+			int remove = tracer-1;
+			if (remove<0) remove = 0;
+			
+			String[] parts = new String[ (args.length) - remove ];
 			
 			for (int i = tracer; i<this.args.length; i++)
 			{
