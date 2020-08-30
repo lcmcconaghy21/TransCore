@@ -80,6 +80,7 @@ public abstract class TransPlugin extends JavaPlugin implements TPlugin
 		
 		this.startup();
 		
+		registered.put(this.getName(), this);
 		log("<a>Finished loading <b>"+this.name+" v"+this.version+"<a>!");
 	}
 	

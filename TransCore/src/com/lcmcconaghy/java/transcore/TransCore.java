@@ -48,6 +48,12 @@ public class TransCore extends TransPlugin
 		});
 	}
 	
+	@Override
+	public void postStartup()
+	{
+		this.alertVault();
+	}
+	
 	// { DISABLE } //
 	
 	@Override
