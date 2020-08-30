@@ -5,6 +5,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.UUID;
 
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 
 import com.lcmcconaghy.java.transcore.Init;
@@ -264,6 +265,10 @@ public class StoreCollection<T extends StoreItem> extends ArrayList<T> implement
 		
 		DB database = TransServer.get().getDatabase(this.plugin.getName());
 		this.coll = database.getCollection(id);
+		
+		Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, () ->
+		this.save(),
+		0L, 100L);
 	}
 
 	@Override
