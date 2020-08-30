@@ -10,6 +10,18 @@ public abstract class TransEvent extends Event implements Cancellable, Runnable
 	
 	private boolean active = true;
 	
+	// { CONSTRUCTORS } //
+	
+	public TransEvent(boolean arg0)
+	{
+		super(arg0);
+	}
+	
+	public TransEvent()
+	{
+		super(false);
+	}
+	
 	// { CANCELLABLE } //
 	
 	public void cancel()
@@ -29,7 +41,7 @@ public abstract class TransEvent extends Event implements Cancellable, Runnable
 		return this.active;
 	}
 	
-	// { ASYNC } //
+	// { RUNNABLE } //
 	
 	@Override
 	public void run()
