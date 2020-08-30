@@ -107,7 +107,7 @@ public class Message
 	 */
 	public static Message display(String arg0, String arg1)
 	{
-		return new Message("<a>"+upperCaseFirst(arg0)+": <b>"+arg1).format();
+		return new Message(format("<a>"+upperCaseFirst(arg0)+": <b>"+arg1));
 	}
 	
 	// { FIELDS } //
@@ -355,6 +355,8 @@ public class Message
 		
 		set = format(set);
 		setText(set);
+		
+		if (this.component.getExtra() == null || this.component.getExtra().size() <= 0) return this;
 		
 		for (BaseComponent extra : this.component.getExtra())
 		{
