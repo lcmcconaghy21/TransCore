@@ -92,7 +92,9 @@ public class TransLocation
 		if (distY<0) distY *= -1;
 		if (distZ<0) distZ *= -1;
 		
-		return distX+distY+distZ;
+		double dist = Math.sqrt(distX+distY+distZ);
+		
+		return dist;
 	}
 	
 	// { GETTERS } //
