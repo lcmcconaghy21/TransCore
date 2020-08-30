@@ -10,6 +10,7 @@ import com.lcmcconaghy.java.transcore.economy.TransEco;
 import com.lcmcconaghy.java.transcore.engine.Engine;
 import com.lcmcconaghy.java.transcore.engine.EnginePlayer;
 import com.lcmcconaghy.java.transcore.engine.EngineServer;
+import com.lcmcconaghy.java.transcore.event.StartupCompleteEvent;
 import com.lcmcconaghy.java.transcore.store.Config;
 import com.lcmcconaghy.java.transcore.store.StoreCollection;
 import com.lcmcconaghy.java.transcore.store.serializable.Serializable;
@@ -41,14 +42,10 @@ public class TransCore extends TransPlugin
 	@Override
 	public void startup()
 	{
-		Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable()
+		Bukkit.getScheduler().runTask(this, () ->
 		{
-			@Override
-			public void run()
-			{
-				alertVault();
-			}
-		}, 15L);
+			new StartupCompleteEvent().run();
+		});
 	}
 	
 	// { DISABLE } //

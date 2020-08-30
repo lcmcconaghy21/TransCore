@@ -1,5 +1,6 @@
 package com.lcmcconaghy.java.transcore;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +20,8 @@ public abstract class TransPlugin extends JavaPlugin implements TPlugin
 {
 	
 	// { FIELDS } //
+	
+	protected static Map<String, TransPlugin> registered = new HashMap<String, TransPlugin>();
 	
 	protected String name;
 	protected String version;
@@ -78,6 +81,12 @@ public abstract class TransPlugin extends JavaPlugin implements TPlugin
 		this.startup();
 		
 		log("<a>Finished loading <b>"+this.name+" v"+this.version+"<a>!");
+	}
+	
+	public void postStartup()
+	{
+		// PUT POST STARTUP INFORMATION HERE
+		return;
 	}
 	
 	// { DISABLE } //
@@ -226,6 +235,13 @@ public abstract class TransPlugin extends JavaPlugin implements TPlugin
 	public List<String> getAuthors()
 	{
 		return this.getDescription().getAuthors();
+	}
+	
+	// { PLUGINS } //
+	
+	public Collection<TransPlugin> getRegisteredPlugins()
+	{
+		return registered.values();
 	}
 	
 }

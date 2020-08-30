@@ -1,9 +1,10 @@
 package com.lcmcconaghy.java.transcore.engine;
 
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.server.ServerListPingEvent;
 
-import com.lcmcconaghy.java.transcore.store.transcore.TransConfig;
+import com.lcmcconaghy.java.transcore.TransCore;
+import com.lcmcconaghy.java.transcore.TransPlugin;
+import com.lcmcconaghy.java.transcore.event.StartupCompleteEvent;
 
 public class EngineServer extends Engine
 {
@@ -13,12 +14,13 @@ public class EngineServer extends Engine
 	private static EngineServer i = new EngineServer();
 	public static EngineServer get() { return EngineServer.i; }
 	
-	// { MOTD } //
-	
 	@EventHandler
-	public void updateMotd(ServerListPingEvent event)
+	public void postStart(StartupCompleteEvent event)
 	{
-		event.setMotd(TransConfig.get().getMotd());
+		for (TransPlugin plugin : TransCore.get().getRegisteredPlugins())
+		{
+			plugin.postStartup();
+		}
 	}
 	
 }
