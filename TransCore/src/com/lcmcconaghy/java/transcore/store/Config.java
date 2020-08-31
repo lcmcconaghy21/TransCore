@@ -39,7 +39,6 @@ public class Config implements Init
 	{
 		if (!arg0)
 		{
-			save();
 			return;
 		}
 		
@@ -107,30 +106,4 @@ public class Config implements Init
 			}
 		}
 	}
-	
-	// { SAVE } //
-	
-	public void save()
-	{
-		for (Field fields : this.getClass().getDeclaredFields())
-		{
-			fields.setAccessible(true);
-			
-			if (Modifier.isStatic(fields.getModifiers())) continue;
-			
-			Object value = null;
-			
-			try
-			{
-				value = fields.get(this);
-			}
-			catch (IllegalArgumentException | IllegalAccessException e)
-			{
-				e.printStackTrace();
-			}
-			
-			yaml.set(fields.getName(), value);
-		}
-	}
-	
 }
