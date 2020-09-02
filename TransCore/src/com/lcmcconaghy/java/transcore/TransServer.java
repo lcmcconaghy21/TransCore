@@ -2,6 +2,7 @@ package com.lcmcconaghy.java.transcore;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +33,7 @@ public class TransServer
 	private SimpleCommandMap commandMap;
 	private Map<UUID,Nametag> nametags = new HashMap<UUID,Nametag>();
 	
-	private List<StoreCollection<?>> collections = new ArrayList<StoreCollection<?>>();
+	private Map<Class<?>, StoreCollection<?>> collections = new HashMap<Class<?>, StoreCollection<?>>();
 	private Map<String,ChestGui> guis = new HashMap<String,ChestGui>();
 	
 	private MongoClient mongoClient;
@@ -172,16 +173,21 @@ public class TransServer
 	
 	// { DATABASE } //
 	
+	public boolean containsCollection(StoreCollection<?> arg0)
+	{
+		return this.collections.containsKey(arg0.getType());
+	}
+	
 	public void registerCollection(StoreCollection<?> arg0)
 	{
-		this.collections.add(arg0);
+		this.collections.put(arg0.getType(), arg0);
 	}
 	
 	public List<UserCollection<?>> getUserCollections()
 	{
 		ArrayList<UserCollection<?>> userCollections = new ArrayList<UserCollection<?>>();
 		
-		for (StoreCollection<?> collection : this.collections)
+		for (StoreCollection<?> collection : this.collections.values())
 		{
 			if (!(collection instanceof UserCollection)) continue;
 			
@@ -191,9 +197,9 @@ public class TransServer
 		return userCollections;
 	}
 	
-	public List<StoreCollection<?>> getStoreCollections()
+	public Collection<StoreCollection<?>> getStoreCollections()
 	{
-		return this.collections;
+		return this.collections.values();
 	}
 	
 	public boolean isSerializable(Object arg0)
