@@ -73,6 +73,41 @@ public class StoreCollection<T extends StoreItem> extends ArrayList<T> implement
 		return ret;
 	}
 	
+	@Deprecated
+	public T remove(int arg0)
+	{
+		return super.remove(arg0);
+	}
+	
+	@Deprecated
+	public boolean remove(Object arg0)
+	{
+		return super.remove(arg0);
+	}
+	
+	public boolean remove(String arg0)
+	{
+		T ret = null;
+		
+		for (T part : this)
+		{
+			if (part.getID() != arg0) continue;
+			
+			ret = part;
+			break;
+		}
+		
+		ret.drop();
+		File itemFile = new File(this.path+File.separator+arg0);
+		
+		if (itemFile.exists())
+		{
+			itemFile.delete();
+		}
+		
+		return (ret == null);
+	}
+	
 	/**
 	 * Create new instance of StoreItem with UUID
 	 * @return new StoreItem instance assigned to a UUID
@@ -111,6 +146,11 @@ public class StoreCollection<T extends StoreItem> extends ArrayList<T> implement
 		if ( get(arg0) == null ) return false;
 		
 		return true;
+	}
+	
+	public Class<T> getType()
+	{
+		return this.type;
 	}
 	
 	// { DATABASE } //
@@ -239,11 +279,6 @@ public class StoreCollection<T extends StoreItem> extends ArrayList<T> implement
 		
 		TransServer.get().registerCollection(this);
 		
-		if (TransServer.get().isMongoEnabled())
-		{
-			this.database = DatabaseType.MONGO;
-		}
-		
 		File src = new File(path);
 		
 		if (!src.exists())
@@ -255,13 +290,19 @@ public class StoreCollection<T extends StoreItem> extends ArrayList<T> implement
 		{
 			for (File sub : src.listFiles())
 			{
-				if (!sub.getName().endsWith(".json")) continue;
+				String fileName = sub.getName();
+				if (!fileName.endsWith(".json")) continue;
 				
+				fileName = fileName.replaceAll(".json", "");
+				
+				if ( has( fileName ) ) remove( fileName );
 				add( load(sub) );
 			}
 			
 			return;
 		}
+		
+		this.database = DatabaseType.MONGO;
 		
 		DB database = TransServer.get().getDatabase(this.plugin.getName());
 		this.coll = database.getCollection(id);
