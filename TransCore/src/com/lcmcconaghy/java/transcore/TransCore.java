@@ -42,10 +42,12 @@ public class TransCore extends TransPlugin
 	@Override
 	public void startup()
 	{
+		
 		Bukkit.getScheduler().runTask(this, () ->
 		{
 			new StartupCompleteEvent().run();
 		});
+		
 	}
 	
 	@Override

@@ -1,6 +1,5 @@
 package com.lcmcconaghy.java.transcore;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,32 +20,16 @@ public abstract class TransPlugin extends JavaPlugin implements TPlugin
 	
 	// { FIELDS } //
 	
-	protected static Map<String, TransPlugin> registered = new HashMap<String, TransPlugin>();
-	
-	protected String name;
-	protected String version;
-	protected ConsoleCommandSender console;
-	
 	protected Config config;
 	
 	protected Map<Class<? extends Init>, List<? extends Init>> initialized = new HashMap<Class<? extends Init>,List<? extends Init>>();
-	
-	// { CONSTRUCTOR } //
-	
-	public TransPlugin()
-	{
-		this.name = this.getName();
-		this.version = this.getDescription().getVersion();
-		
-		this.console = Bukkit.getConsoleSender();
-	}
 	
 	// { ENABLE } //
 	
 	@Override
 	public void onEnable()
 	{
-		log(new Message("Loading "+this.name+" v"+this.version).titleize());
+		log(new Message("Loading "+this.getName()+" v"+this.getVersion()).titleize());
 		
 		log("<e>Registering <b>"+getAdapters().size()+" <e>Adapters...");
 		registerAdapters();
@@ -80,8 +63,7 @@ public abstract class TransPlugin extends JavaPlugin implements TPlugin
 		
 		this.startup();
 		
-		registered.put(this.getName(), this);
-		log("<a>Finished loading <b>"+this.name+" v"+this.version+"<a>!");
+		log("<a>Finished loading <b>"+this.getName()+" v"+this.getVersion()+"<a>!");
 	}
 	
 	public void postStartup()
@@ -222,7 +204,7 @@ public abstract class TransPlugin extends JavaPlugin implements TPlugin
 	 */
 	public ConsoleCommandSender getConsoleLogger()
 	{
-		return this.console;
+		return Bukkit.getConsoleSender();
 	}
 	
 	/**
@@ -230,19 +212,11 @@ public abstract class TransPlugin extends JavaPlugin implements TPlugin
 	 */
 	public String getVersion()
 	{
-		return this.version;
+		return this.getDescription().getVersion();
 	}
 	
 	public List<String> getAuthors()
 	{
 		return this.getDescription().getAuthors();
 	}
-	
-	// { PLUGINS } //
-	
-	public Collection<TransPlugin> getRegisteredPlugins()
-	{
-		return registered.values();
-	}
-	
 }
