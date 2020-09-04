@@ -180,6 +180,8 @@ public class TransServer
 	
 	public void registerCollection(StoreCollection<?> arg0)
 	{
+		if ( containsCollection(arg0) ) return;
+		
 		this.collections.put(arg0.getType(), arg0);
 	}
 	
