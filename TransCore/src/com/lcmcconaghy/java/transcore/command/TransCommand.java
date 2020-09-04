@@ -339,7 +339,6 @@ public class TransCommand implements Init
 		// IF NEXT ARGUMENT DOES NOT EXIST
 		if (arg == null)
 		{
-			error("Could not find argument for latest parameter");
 			throw new TransCommandException("No argument for position "+this.tracer++);
 		}
 		
@@ -387,6 +386,9 @@ public class TransCommand implements Init
 	
 	public Argument<?> getArgumentAt(int arg0)
 	{
+		// IF GIVEN ARGUMENTS ARE NULL (OR EQUAL TO ZERO)
+		if (this.arguments==null || this.arguments.size()<=0) return null;
+		
 		// IF THERE ARE NO ARGUMENTS AT DEFINED POSITION
 		if (this.arguments.size() <= arg0) return null;
 		
