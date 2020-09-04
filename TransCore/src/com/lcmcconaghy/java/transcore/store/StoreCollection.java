@@ -91,13 +91,15 @@ public class StoreCollection<T extends StoreItem> extends ArrayList<T> implement
 		
 		for (T part : this)
 		{
-			if (part.getID() != arg0) continue;
+			if (!part.getID().equalsIgnoreCase(arg0)) continue;
 			
 			ret = part;
 			break;
 		}
 		
-		ret.drop();
+		this.remove(ret);
+		
+		if (ret == null) return false;
 		File itemFile = new File(this.path+File.separator+arg0);
 		
 		if (itemFile.exists())
@@ -286,14 +288,15 @@ public class StoreCollection<T extends StoreItem> extends ArrayList<T> implement
 			src.mkdirs();
 		}
 		
+		this.clear();
+		
 		if (!TransServer.get().isMongoEnabled())
 		{
 			for (File sub : src.listFiles())
 			{
 				String fileName = sub.getName();
-				if (!fileName.endsWith(".json")) continue;
 				
-				fileName = fileName.replaceAll(".json", "");
+				if (fileName.contains(".json")) fileName = fileName.replaceAll(".json", "");
 				
 				if ( has( fileName ) ) remove( fileName );
 				add( load(sub) );

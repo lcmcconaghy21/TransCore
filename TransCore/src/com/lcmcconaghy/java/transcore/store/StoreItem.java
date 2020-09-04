@@ -32,7 +32,7 @@ public class StoreItem<T extends StoreItem<T>>
 	 */
 	public void drop()
 	{
-		this.store.remove(this.getID());
+		store.remove(this.getID());
 	}
 	
 	/**
