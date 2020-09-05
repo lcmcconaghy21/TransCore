@@ -25,7 +25,7 @@ public class ChestGui implements Init
 	
 	// { CONSTRUCTOR } //
 	
-	public ChestGui(String arg0, InventoryHolder arg1)
+	public ChestGui(String arg0)
 	{
 		this.id = arg0;
 	}
