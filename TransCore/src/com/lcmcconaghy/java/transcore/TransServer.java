@@ -34,7 +34,7 @@ public class TransServer
 	private Map<UUID,Nametag> nametags = new HashMap<UUID,Nametag>();
 	
 	private Map<Class<?>, StoreCollection<?>> collections = new HashMap<Class<?>, StoreCollection<?>>();
-	private Map<String,ChestGui> guis = new HashMap<String,ChestGui>();
+	private Map<String,ChestGui<?>> guis = new HashMap<String,ChestGui<?>>();
 	
 	private MongoClient mongoClient;
 	
@@ -131,7 +131,7 @@ public class TransServer
 	 * Register a new GUI
 	 * @param arg0 ChestGui to be registered
 	 */
-	public void registerGui(ChestGui arg0)
+	public void registerGui(ChestGui<?> arg0)
 	{
 		if ( containsGui(arg0) ) return;
 		
@@ -152,7 +152,7 @@ public class TransServer
 	 * @param arg0 ChestGui which is to be checked for
 	 * @return whether the GUI is registered
 	 */
-	public boolean containsGui(ChestGui arg0)
+	public boolean containsGui(ChestGui<?> arg0)
 	{
 		return this.guis.containsKey(arg0.getID());
 	}
@@ -161,7 +161,7 @@ public class TransServer
 	 * @param arg0 InventoryView
 	 * @return GUI matching the InventoryView
 	 */
-	public ChestGui getGui(InventoryView arg0)
+	public ChestGui<?> getGui(InventoryView arg0)
 	{
 		if ( !isGui(arg0) )
 		{
