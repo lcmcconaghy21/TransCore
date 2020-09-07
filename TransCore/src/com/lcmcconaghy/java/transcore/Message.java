@@ -231,6 +231,18 @@ public class Message
 	}
 	
 	/**
+	 * Insert into player's chatbox
+	 * @param arg0 String arguments
+	 * @return this Message
+	 */
+	public Message suggest(String arg0)
+	{
+		this.component.setClickEvent(new ClickEvent(Action.SUGGEST_COMMAND, arg0));
+		
+		return this;
+	}
+	
+	/**
 	 * Add extra Messages to this Message
 	 * @param messages Varargs Messages to apply
 	 * @return this Message
