@@ -4,7 +4,7 @@ import org.bukkit.entity.Player;
 
 import com.lcmcconaghy.java.transcore.TransPerm;
 import com.lcmcconaghy.java.transcore.command.TransCommand;
-import com.lcmcconaghy.java.transcore.command.argument.ArgumentProfile;
+import com.lcmcconaghy.java.transcore.command.argument.ArgumentProfileSelf;
 import com.lcmcconaghy.java.transcore.exception.TransCommandException;
 import com.lcmcconaghy.java.transcore.store.transcore.IUser;
 import com.lcmcconaghy.java.transcore.store.transcore.Profile;
@@ -25,7 +25,7 @@ public class CmdProfileSelect extends TransCommand
 		this.setRequiresPlayer(true);
 		this.setPerm(TransPerm.PROFILE_SELECT);
 		this.setDesc("play as a profile");
-		this.addArgument(ArgumentProfile.get(), "name", true);
+		this.addArgument(ArgumentProfileSelf.get(), "name", true);
 	}
 	
 	// { EXECUTION } //
