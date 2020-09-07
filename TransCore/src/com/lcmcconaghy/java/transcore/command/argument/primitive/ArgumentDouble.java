@@ -34,7 +34,7 @@ public class ArgumentDouble extends ArgumentAbstract<Double>
 	}
 
 	@Override
-	public List<String> getTabCompleteList()
+	public List<String> getTabCompleteList(CommandSender arg0)
 	{
 		return UtilGeneral.list("1");
 	}

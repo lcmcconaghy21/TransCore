@@ -46,7 +46,7 @@ public class ArgumentStringList extends ArgumentAbstract<List<String>>
 		return ret;
 	}
 	@Override
-	public List<String> getTabCompleteList()
+	public List<String> getTabCompleteList(CommandSender arg0)
 	{
 		return UtilGeneral.list("argumentOnepartOne,argumentTwopartOne",
 				                "argumentOnepartTwo,argumentTwopartTwo");

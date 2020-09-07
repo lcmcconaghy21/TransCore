@@ -16,7 +16,8 @@ public class ArgumentInteger extends ArgumentAbstract<Integer>
 	public static ArgumentInteger get() { return ArgumentInteger.i; }
 	
 	// { ARG } //
-
+	
+	@Override
 	public Integer read(String arg0, CommandSender arg1) throws TransCommandException
 	{
 		int ret = 1;
@@ -32,8 +33,9 @@ public class ArgumentInteger extends ArgumentAbstract<Integer>
 		
 		return ret;
 	}
-
-	public List<String> getTabCompleteList()
+	
+	@Override
+	public List<String> getTabCompleteList(CommandSender arg0)
 	{
 		return UtilGeneral.list("1");
 	}

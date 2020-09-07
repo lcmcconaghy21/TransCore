@@ -37,7 +37,7 @@ public class ArgumentUser<T extends UserItem> extends ArgumentAbstract<T>
 	}
 
 	@Override
-	public List<String> getTabCompleteList()
+	public List<String> getTabCompleteList(CommandSender arg0)
 	{
 		List<String> usernames = new ArrayList<String>();
 		

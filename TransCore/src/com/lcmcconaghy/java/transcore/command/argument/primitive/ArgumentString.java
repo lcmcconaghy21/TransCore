@@ -17,12 +17,14 @@ public class ArgumentString extends ArgumentAbstract<String>
 	
 	// { ARG } //
 	
+	@Override
 	public String read(String arg0, CommandSender arg1) throws TransCommandException
 	{
 		return arg0;
 	}
-
-	public List<String> getTabCompleteList()
+	
+	@Override
+	public List<String> getTabCompleteList(CommandSender arg0)
 	{
 		return new ArrayList<String>();
 	}

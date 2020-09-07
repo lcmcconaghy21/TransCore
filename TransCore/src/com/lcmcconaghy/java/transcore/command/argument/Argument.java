@@ -12,7 +12,7 @@ public interface Argument<T>
 	
 	public T read(String arg0, CommandSender arg1) throws TransCommandException;
 	
-	public List<String> getTabCompleteList();
+	public List<String> getTabCompleteList(CommandSender arg0);
 	
 	public String getDisplay(TransCommand arg0);
 	

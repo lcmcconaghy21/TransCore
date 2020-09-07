@@ -26,7 +26,7 @@ public class ArgumentBoolean extends ArgumentAbstract<Boolean>
 	}
 
 	@Override
-	public List<String> getTabCompleteList()
+	public List<String> getTabCompleteList(CommandSender arg0)
 	{
 		return UtilGeneral.list("true", "false");
 	}
