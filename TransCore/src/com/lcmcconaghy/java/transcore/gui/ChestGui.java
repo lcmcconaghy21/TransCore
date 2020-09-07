@@ -4,9 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 
 import com.lcmcconaghy.java.transcore.Init;
@@ -14,12 +14,12 @@ import com.lcmcconaghy.java.transcore.TransPlugin;
 import com.lcmcconaghy.java.transcore.TransServer;
 import com.lcmcconaghy.java.transcore.util.UtilGeneral;
 
-public class ChestGui implements Init
+public abstract class ChestGui<T extends ChestGui<T>> implements Init, ChestUI<T>
 {
 	
 	// { FIELDS } //
 	
-	private String id;
+	protected String id;
 	
 	private Map<Integer, Map<ItemStack,Runnable>> options = new HashMap<Integer,Map<ItemStack,Runnable>>();
 	
@@ -136,14 +136,18 @@ public class ChestGui implements Init
 	
 	// { DISPLAY } //
 	
-	public void display(InventoryHolder arg0)
+	public void display(Player arg0)
 	{
-		Inventory gui = Bukkit.createInventory(arg0, InventoryType.CHEST, this.id);
+		T ui = build(arg0);
+		
+		Inventory gui = Bukkit.createInventory(arg0, InventoryType.CHEST, ui.id);
 		
 		for (int i : this.options.keySet())
 		{
-			gui.setItem(i, getStack(i) );
+			gui.setItem(i, ui.getStack(i) );
 		}
+		
+		arg0.openInventory(gui);
 	}
 	
 	// { INIT } //
