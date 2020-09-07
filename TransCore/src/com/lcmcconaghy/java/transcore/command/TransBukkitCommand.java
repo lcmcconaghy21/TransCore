@@ -124,6 +124,6 @@ public class TransBukkitCommand extends BukkitCommand
 			return new ArrayList<String>();
 		}
 		
-		return argument.getTabCompleteList();
+		return argument.getTabCompleteList(arg0);
 	}
 }
