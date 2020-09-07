@@ -26,6 +26,8 @@ public class TransConfig extends Config
 	private String mongoUser = "username";
 	private String mongoPassword = "password";
 	
+	private boolean disableActivityWithoutProfile = false;
+	
 	// { GETTERS } //
 	
 	public boolean willUseMongo()
@@ -51,5 +53,10 @@ public class TransConfig extends Config
 	public String getMongoPassword()
 	{
 		return this.mongoPassword;
+	}
+	
+	public boolean allowsActivityWithoutProfile()
+	{
+		return !this.disableActivityWithoutProfile;
 	}
 }
