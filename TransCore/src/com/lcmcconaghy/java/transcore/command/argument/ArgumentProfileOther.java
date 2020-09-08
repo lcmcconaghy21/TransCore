@@ -33,6 +33,8 @@ public class ArgumentProfileOther extends ArgumentAbstract<Profile>
 			break;
 		}
 		
+		if (ret == null) throw new TransCommandException("There is no other character named <b>"+arg0);
+		
 		return ret;
 	}
 	@Override

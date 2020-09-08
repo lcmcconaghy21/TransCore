@@ -37,6 +37,8 @@ public class ArgumentProfileSelf extends ArgumentAbstract<Profile>
 			break;
 		}
 		
+		if (ret == null) throw new TransCommandException("You have no profiles named <b>"+arg0);
+		
 		return ret;
 	}
 
