@@ -322,16 +322,15 @@ public class TransCommand implements Init
 	public <T> T readArgument() throws TransCommandException
 	{
 		// IF PLUGIN REQUIRES NO ARGUMENTS
-		if (arguments==null || arguments.size()<=0)
+		if (arguments==null || arguments.size()<=0 || args.length==0 || args == null)
 		{
-			throw new TransCommandException("Arguments are null, cannot read them dimwit.");
+			throw new TransCommandException("Improper syntax. Proper syntax: <b>/"+this.getFullCommand()+" "+this.getUsage());
 		}
 		
 		// IF SENDER HAS NOT SENT ALL REQUIRED ARGUMENTS
 		if (args.length <= tracer)
 		{
-			error("This command requires more arguments in order to be performed.");
-			throw new TransCommandException("Unable to parse. Too few arguments.");
+			throw new TransCommandException("Unable to parse. Too few arguments. Proper syntax: <b>/"+this.getFullCommand()+" "+this.getUsage());
 		}
 		
 		Argument<T> arg = (Argument<T>) getNextArgument();
@@ -339,7 +338,7 @@ public class TransCommand implements Init
 		// IF NEXT ARGUMENT DOES NOT EXIST
 		if (arg == null)
 		{
-			throw new TransCommandException("No argument for position "+this.tracer++);
+			throw new TransCommandException("No argument for position "+(this.tracer+1)+". Proper syntax: <b>/"+this.getFullCommand()+" "+this.getUsage());
 		}
 		
 		// IF ARGUMENT WILL BE EXECUTED WITH ALL FOLLOWING PARAMETERS
