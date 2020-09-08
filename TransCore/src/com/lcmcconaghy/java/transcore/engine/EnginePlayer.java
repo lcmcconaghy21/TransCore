@@ -67,7 +67,8 @@ public class EnginePlayer extends Engine
 	@EventHandler(priority=EventPriority.HIGH)
 	public void profileSelect(PlayerJoinEvent event)
 	{
-		if ( IUser.get( event.getPlayer() ).getActiveProfile() != null ) return;
+		if ( IUser.get( event.getPlayer() ).getActiveProfile() != null 
+		  || IUser.get( event.getPlayer() ).getProfiles().size() == 0) return;
 		
 		GuiProfile profileUI = GuiProfile.get().build( event.getPlayer() );
 		
