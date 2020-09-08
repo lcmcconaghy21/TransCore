@@ -54,21 +54,25 @@ public class Profile extends StoreItem<Profile>
 	public void setName(String arg0)
 	{
 		this.name = arg0;
+		this.update();
 	}
 	
 	public void setDesc(String arg0)
 	{
 		this.desc = arg0;
+		this.update();
 	}
 	
 	public void setOwner(UserItem arg0)
 	{
 		this.owner = arg0.getID();
+		this.update();
 	}
 	
 	public void setProperty(String arg0, Object arg1)
 	{
 		this.properties.put(arg0, arg1);
+		this.update();
 	}
 	
 }
